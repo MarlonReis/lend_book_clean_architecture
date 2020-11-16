@@ -12,5 +12,8 @@
   "dependencies": {
     "@types/typescript": "^2.0.0",
     "typescript": "^4.0.5"
+  },
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.0.0"
   }
 }
