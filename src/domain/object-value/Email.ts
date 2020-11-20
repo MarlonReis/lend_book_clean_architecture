@@ -1,5 +1,5 @@
 import { Either, failure, success } from '../../shared/Either'
-import InvalidEmailError from '../errors/InvalidEmailError'
+import { InvalidEmailError } from '../errors'
 
 const emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 

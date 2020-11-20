@@ -1,4 +1,4 @@
-import InvalidNameError from '../../../src/domain/errors/InvalidNameError'
+import { InvalidNameError } from '../../../src/domain/errors'
 import { Name } from '../../../src/domain/object-value/Name'
 
 describe('Name', () => {

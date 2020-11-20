@@ -1,5 +1,5 @@
 import { Either, success, failure } from '../../shared/Either'
-import InvalidNameError from '../errors/InvalidNameError'
+import { InvalidNameError } from '../errors'
 
 export class Name {
   private readonly _value: string
