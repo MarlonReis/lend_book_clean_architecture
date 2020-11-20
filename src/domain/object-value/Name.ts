@@ -1,4 +1,5 @@
 import { Either, success, failure } from '../../shared/Either'
+import InvalidNameError from '../errors/InvalidNameError'
 
 export class Name {
   readonly value: string
@@ -8,9 +9,9 @@ export class Name {
   }
 
   static create (name: string): Either<Error, Name> {
-    if (name.length > 0) {
+    if (/.{3,}/.test(name)) {
       return success(new Name(name))
     }
-    return failure(new Error('Error'))
+    return failure(new InvalidNameError(name))
   }
 }
