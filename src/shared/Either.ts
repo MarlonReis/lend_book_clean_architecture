@@ -5,12 +5,15 @@ interface SharedResponse<F, S> {
   isSuccess: () => this is Success<F, S>
   value: any
 }
-
 export class Failures<F, S> implements SharedResponse<F, S> {
-  public readonly value: F
+  private readonly _value: F
 
   constructor (value: F) {
-    this.value = value
+    this._value = value
+  }
+
+  get value (): F {
+    return this._value
   }
 
   isFailure (): this is Failures<F, S> {
@@ -23,10 +26,14 @@ export class Failures<F, S> implements SharedResponse<F, S> {
 }
 
 export class Success<F, S> implements SharedResponse<F, S> {
-  public readonly value: S
+  private readonly _value: S
 
   constructor (value: S) {
-    this.value = value
+    this._value = value
+  }
+
+  get value (): S {
+    return this._value
   }
 
   isFailure (): this is Failures<F, S> {
