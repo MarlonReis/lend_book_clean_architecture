@@ -9,7 +9,7 @@ describe('Name', () => {
     expect(eitherName.value).toBeInstanceOf(Name)
   })
 
-  test('should return failure when nome have only throw characters', () => {
+  test('should return failure when nome have only two characters', () => {
     const eitherName = Name.create('An')
 
     expect(eitherName.isSuccess()).toBe(false)
