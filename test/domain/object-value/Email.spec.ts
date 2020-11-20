@@ -14,4 +14,11 @@ describe('Email', () => {
         expect(result.isFailure()).toBe(true)
         expect(result.value).toBeInstanceOf(InvalidEmailError)
     })
+
+    test('should failure is true when email is undefined', () => {
+        const result = Email.create(undefined)
+        expect(result.isSuccess()).toBe(false)
+        expect(result.isFailure()).toBe(true)
+        expect(result.value).toBeInstanceOf(InvalidEmailError)
+    })
 })
