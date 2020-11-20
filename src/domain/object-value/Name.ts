@@ -9,7 +9,7 @@ export class Name {
   }
 
   static create (name: string): Either<Error, Name> {
-    if (/.{3,}/.test(name)) {
+    if (name && /.{3,}/.test(name)) {
       return success(new Name(name))
     }
     return failure(new InvalidNameError(name))
