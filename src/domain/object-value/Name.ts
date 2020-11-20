@@ -1,11 +1,16 @@
-export class Name {
-  private readonly _value: string
+import { Either, success, failure } from '../../shared/Either'
 
-  constructor (name: string) {
-    this._value = name
+export class Name {
+  readonly value: string
+
+  private constructor (name: string) {
+    this.value = name
   }
 
-  get value (): string {
-    return this._value
+  static create (name: string): Either<Error, Name> {
+    if (name.length > 0) {
+      return success(new Name(name))
+    }
+    return failure(new Error('Error'))
   }
 }
