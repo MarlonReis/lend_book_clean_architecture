@@ -16,4 +16,9 @@ describe('Name', () => {
     expect(eitherName.isFailure()).toBe(true)
     expect(eitherName.value).toBeInstanceOf(InvalidNameError)
   })
+
+  test('should return failure when nome undefined', () => {
+    const eitherName = Name.create(undefined)
+    expect(eitherName.isFailure()).toBe(true)
+  })
 })
