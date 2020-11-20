@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "pretest": "jest --clearCache",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --silent",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
