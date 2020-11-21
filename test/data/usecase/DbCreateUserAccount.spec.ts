@@ -115,4 +115,22 @@ describe('DbCreateUserAccount', () => {
         const password = Password.create('Valid@Password')
         expect(encryptSpy).toBeCalledWith(password.value)
     })
+
+    test('should call repository with correct param', () => {
+        const { sut, createUserAccountRepositoryStub } = makeSutFactory()
+        const createSpy = jest.spyOn(createUserAccountRepositoryStub, 'create')
+        sut.create({
+            name: 'Valid Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
+        })
+        expect(createSpy).toBeCalledWith({
+            name: { value: 'Valid Name' },
+            email: { value: 'valid@email.com.br' },
+            password: { value: 'Valid@Password' },
+            getEmail: expect.any(Function),
+            getPassword: expect.any(Function),
+            getName: expect.any(Function)
+        })
+    })
 })
