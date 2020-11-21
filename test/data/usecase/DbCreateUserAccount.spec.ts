@@ -1,7 +1,7 @@
 import { EncryptsPassword } from '../../../src/data/protocol/EncryptsPassword'
 import { CreateUserAccountRepository } from '../../../src/data/repositories/CreateUserAccountRepository'
 import { DbCreateUserAccount } from '../../../src/data/usecase/DbCreateUserAccount'
-import { CreateUserAccountError } from '../../../src/domain/errors'
+import { CreateUserAccountError, InvalidEmailError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/user/User'
 import { Password } from '../../../src/domain/object-value'
 import { CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
@@ -53,6 +53,22 @@ describe('DbCreateUserAccount', () => {
             name: { value: 'Any Name' },
             email: { value: 'valid@email.com.br' },
             password: { value: expect.any(String) }
+        })
+    })
+
+    test('should return failure true when email is invalid', () => {
+        const { sut } = makeSutFactory()
+        const response = sut.create({
+            name: 'Any Name',
+            email: 'valid-email.com.br',
+            password: 'Any@Password'
+        })
+
+        expect(response.isFailure()).toBe(true)
+        expect(response.value).toBeInstanceOf(CreateUserAccountError)
+        expect(response.value).toMatchObject({
+            message: "attribute 'email' equals the valid-email.com.br is invalid!",
+            cause: new InvalidEmailError('valid-email.com.br')
         })
     })
 })
