@@ -13,4 +13,10 @@ describe('Password', () => {
         expect(result.isFailure()).toBe(true)
         expect(result.value).toBeInstanceOf(InvalidPasswordError)
      })
+
+     test('should return failure equals true when password is undefined', () => {
+        const result = Password.create(undefined)
+        expect(result.isFailure()).toBe(true)
+        expect(result.value).toBeInstanceOf(InvalidPasswordError)
+     })
 })
