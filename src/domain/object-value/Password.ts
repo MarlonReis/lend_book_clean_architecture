@@ -1,4 +1,5 @@
 import { Either, failure, success } from '../../shared/Either'
+import { InvalidPasswordError } from '../errors'
 
 export class Password {
     private readonly _value: string
@@ -8,10 +9,10 @@ export class Password {
     }
 
     static create (password: string): Either<Error, Password> {
-        if (password.length > 0) {
+        if (/.{8,64}/.test(password)) {
             return success(new Password(password))
         }
-        return failure(new Error('Error'))
+        return failure(new InvalidPasswordError(password))
     }
 
     get value (): string {
