@@ -103,4 +103,16 @@ describe('DbCreateUserAccount', () => {
             cause: new InvalidPasswordError('invalid')
         })
     })
+
+    test('should call encrypt with correct param', () => {
+        const { sut, encryptsStub } = makeSutFactory()
+        const encryptSpy = jest.spyOn(encryptsStub, 'encrypt')
+        sut.create({
+            name: 'Valid Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
+        })
+        const password = Password.create('Valid@Password')
+        expect(encryptSpy).toBeCalledWith(password.value)
+    })
 })
