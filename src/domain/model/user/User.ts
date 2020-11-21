@@ -10,4 +10,16 @@ export class User {
         this.email = email
         this.password = password
     }
+
+    readonly getName = (): Name => {
+        return this.name
+    }
+
+    readonly getEmail = (): Email => {
+        return this.email
+    }
+
+    readonly getPassword = (): Password => {
+        return this.password
+    }
 }
