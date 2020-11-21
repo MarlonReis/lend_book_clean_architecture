@@ -6,6 +6,7 @@ export class Password {
 
     private constructor (password: string) {
         this.value = password
+        Object.freeze(this)
     }
 
     static create (password: string): Either<InvalidPasswordError, Password> {

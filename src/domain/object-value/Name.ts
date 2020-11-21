@@ -6,6 +6,7 @@ export class Name {
 
   private constructor (name: string) {
     this.value = name
+    Object.freeze(this)
   }
 
   static create (name: string): Either<InvalidNameError, Name> {

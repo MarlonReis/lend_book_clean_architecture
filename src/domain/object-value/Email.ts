@@ -8,6 +8,7 @@ export default class Email {
 
     private constructor (email: string) {
         this.value = email
+        Object.freeze(this)
     }
 
     static create (email: string): Either<InvalidEmailError, Email> {
