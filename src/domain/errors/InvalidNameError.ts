@@ -1,6 +1,6 @@
 export class InvalidNameError extends Error {
     constructor (name: string) {
-        super(`Attribute 'name' equal ${name} is invalid!`)
+        super(`Attribute 'name' equals ${name} is invalid!`)
         this.name = 'InvalidNameError'
     }
 }

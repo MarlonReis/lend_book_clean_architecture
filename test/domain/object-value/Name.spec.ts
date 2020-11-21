@@ -21,4 +21,20 @@ describe('Name', () => {
     const eitherName = Name.create(undefined)
     expect(eitherName.isFailure()).toBe(true)
   })
+
+  test('should return name value', () => {
+    const result = Name.create('Valid Name')
+    const name = result.value
+    expect(name).toMatchObject({
+      value: 'Valid Name'
+    })
+  })
+
+  test('should return error message', () => {
+    const result = Name.create('an')
+    const name = result.value
+    expect(name).toMatchObject({
+      message: "Attribute 'name' equals an is invalid!"
+    })
+  })
 })
