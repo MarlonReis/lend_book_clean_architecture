@@ -9,7 +9,7 @@ export class Password {
     }
 
     static create (password: string): Either<Error, Password> {
-        if (/.{8,64}/.test(password)) {
+        if (password && /.{8,64}/.test(password)) {
             return success(new Password(password))
         }
         return failure(new InvalidPasswordError(password))
