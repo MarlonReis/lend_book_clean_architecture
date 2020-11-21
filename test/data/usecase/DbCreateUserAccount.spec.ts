@@ -4,27 +4,43 @@ import { DbCreateUserAccount } from '../../../src/data/usecase/DbCreateUserAccou
 import { CreateUserAccountError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/user/User'
 import { Password } from '../../../src/domain/object-value'
+import { CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
 import { Either, success } from '../../../src/shared/Either'
+
+const makeEncryptsStub = (): EncryptsPassword => {
+    class EncryptsPasswordStub implements EncryptsPassword {
+        encrypt (password: Password): Password {
+            return password
+        }
+    }
+    return new EncryptsPasswordStub()
+}
+
+const makeCreateUserAccountRepositoryStub = (): CreateUserAccountRepository => {
+    class CreateUserAccountRepositoryStub implements CreateUserAccountRepository {
+        create (user: User): Either<CreateUserAccountError, User> {
+            return success(user)
+        }
+    }
+    return new CreateUserAccountRepositoryStub()
+}
+
+interface TypeSut {
+    encryptsStub: EncryptsPassword
+    createUserAccountRepositoryStub: CreateUserAccountRepository
+    sut: CreateUserAccount
+}
+
+const makeSutFactory = (): TypeSut => {
+    const encryptsStub = makeEncryptsStub()
+    const createUserAccountRepositoryStub = makeCreateUserAccountRepositoryStub()
+    const sut = new DbCreateUserAccount(encryptsStub, createUserAccountRepositoryStub)
+    return { sut, encryptsStub, createUserAccountRepositoryStub }
+}
 
 describe('DbCreateUserAccount', () => {
     test('should create new account with success', () => {
-        class EncryptsPasswordStub implements EncryptsPassword {
-            encrypt (password: Password): Password {
-                return password
-            }
-        }
-
-        class CreateUserAccountRepositoryStub implements CreateUserAccountRepository {
-            create (user: User): Either<CreateUserAccountError, User> {
-                return success(user)
-            }
-        }
-
-        const encryptsPasswordStub = new EncryptsPasswordStub()
-        const createUserAccountRepositoryStub = new CreateUserAccountRepositoryStub()
-        const sut = new DbCreateUserAccount(
-            encryptsPasswordStub,
-            createUserAccountRepositoryStub)
+        const { sut } = makeSutFactory()
         const response = sut.create({
             name: 'Any Name',
             email: 'valid@email.com.br',

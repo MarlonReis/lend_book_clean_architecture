@@ -9,7 +9,6 @@ import { CreateUserAccountRepository } from '../repositories/CreateUserAccountRe
 
 export class DbCreateUserAccount implements CreateUserAccount {
     private readonly encryptsPassword: EncryptsPassword
-
     private readonly repository: CreateUserAccountRepository
 
     constructor (
@@ -39,8 +38,7 @@ export class DbCreateUserAccount implements CreateUserAccount {
 
         const name: Name = nameOrError.value
         const email: Email = emailOrError.value
-        const password: Password = this.encryptsPassword
-            .encrypt(passwordOrError.value)
+        const password: Password = this.encryptsPassword.encrypt(passwordOrError.value)
 
         const user = new User(name, email, password)
         return this.repository.create(user)
