@@ -48,5 +48,11 @@ describe('DbCreateUserAccount', () => {
         })
 
         expect(response.isSuccess()).toBe(true)
+        expect(response.value).toBeInstanceOf(User)
+        expect(response.value).toMatchObject({
+            name: { value: 'Any Name' },
+            email: { value: 'valid@email.com.br' },
+            password: { value: expect.any(String) }
+        })
     })
 })
