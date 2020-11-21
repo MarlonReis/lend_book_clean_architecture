@@ -9,6 +9,7 @@ export class User {
         this.name = name
         this.email = email
         this.password = password
+        Object.freeze(this)
     }
 
     readonly getName = (): Name => {

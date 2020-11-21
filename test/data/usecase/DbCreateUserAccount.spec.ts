@@ -124,6 +124,7 @@ describe('DbCreateUserAccount', () => {
             email: 'valid@email.com.br',
             password: 'Valid@Password'
         })
+
         expect(createSpy).toBeCalledWith({
             name: { value: 'Valid Name' },
             email: { value: 'valid@email.com.br' },
