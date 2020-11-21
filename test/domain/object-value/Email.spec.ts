@@ -1,11 +1,24 @@
 import { InvalidEmailError } from '../../../src/domain/errors'
 import Email from '../../../src/domain/object-value/Email'
+import { Either } from '../../../src/shared/Either'
 
 describe('Email', () => {
     test('should create valid email', () => {
         const result = Email.create('valid@email.com.br')
         expect(result.isSuccess()).toBe(true)
         expect(result.value).toBeInstanceOf(Email)
+    })
+
+    test('should return email data', () => {
+        const result: Either<InvalidEmailError, Email> = Email.create('valid@email.com.br')
+        const email = result.value
+        expect(email).toMatchObject({ value: 'valid@email.com.br' })
+    })
+
+    test('should return error message', () => {
+        const result: Either<InvalidEmailError, Email> = Email.create('valid-email.com.br')
+        const email = result.value
+        expect(email).toMatchObject({ message: "attribute 'email' equals the valid-email.com.br is invalid!" })
     })
 
     test('should failure is true when email is invalid', () => {
