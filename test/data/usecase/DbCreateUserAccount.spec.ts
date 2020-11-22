@@ -5,7 +5,7 @@ import { CreateUserAccountError, InvalidEmailError, InvalidNameError, InvalidPas
 import { User } from '../../../src/domain/model/user/User'
 import { Password } from '../../../src/domain/object-value'
 import { CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
-import { Either, success } from '../../../src/shared/Either'
+import { Either, success, failure } from '../../../src/shared/Either'
 
 const makeEncryptsStub = (): EncryptsPassword => {
     class EncryptsPasswordStub implements EncryptsPassword {
@@ -133,5 +133,19 @@ describe('DbCreateUserAccount', () => {
             getPassword: expect.any(Function),
             getName: expect.any(Function)
         })
+    })
+
+    test('should return error when repository return', () => {
+        const { sut, createUserAccountRepositoryStub } = makeSutFactory()
+        jest.spyOn(createUserAccountRepositoryStub, 'create')
+        .mockReturnValueOnce(failure(new Error('any message')))
+        const response = sut.create({
+            name: 'Valid Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
+        })
+
+       expect(response.isFailure()).toBe(true)
+       expect(response.value).toEqual(new Error('any message'))
     })
 })
