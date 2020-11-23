@@ -4,8 +4,8 @@ import { ConnectionDatabaseMongoDb } from '../../../../src/infrastructure/databa
 const connection = new ConnectionDatabaseMongoDb(process.env.MONGO_URL)
 
 describe('ConnectionDatabaseMongoDb', () => {
-    beforeEach(async () => await connection.open())
-    afterEach(async () => await connection.close())
+    beforeAll(async () => await connection.open())
+    afterAll(async () => await connection.close())
 
     test('should be open connection with database in memory', async () => {
         expect(connection.isConnected()).toBe(true)
@@ -26,5 +26,14 @@ describe('ConnectionDatabaseMongoDb', () => {
 
         expect(collectionAfterReconnect).toBeTruthy()
         expect(collectionAfterReconnect.collectionName).toBe('account')
+    })
+
+    test('should isConnected return false when not have connection ', async () => {
+        await connection.close()
+        expect(connection.isConnected()).toBe(false)
+    })
+    test('should isConnected return true when have connection ', async () => {
+        await connection.open()
+        expect(connection.isConnected()).toBe(true)
     })
 })

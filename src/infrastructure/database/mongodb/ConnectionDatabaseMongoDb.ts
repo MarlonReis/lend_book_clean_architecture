@@ -17,15 +17,17 @@ export class ConnectionDatabaseMongoDb implements ConnectionDatabase {
     }
 
     close = async (): Promise<void> => {
-        await this.mongoClient.close()
-        this.mongoClient = undefined
+        if (this.isConnected()) {
+            await this.mongoClient.close()
+            this.mongoClient = undefined
+        }
     }
 
     isConnected (): boolean {
-        if (this.mongoClient?.isConnected()) {
-            return true
+        if (!this.mongoClient) {
+            return false
         }
-        return false
+        return this.mongoClient.isConnected()
     }
 
     getCollectionByName = async (collectionName: string): Promise<Collection> => {
