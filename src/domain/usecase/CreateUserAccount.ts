@@ -8,5 +8,5 @@ export interface CreateAccount {
     password: string
 }
 export interface CreateUserAccount {
-    create: (account: CreateAccount) => Either<CreateUserAccountError, User>
+    create: (account: CreateAccount) => Promise<Either<CreateUserAccountError, User>>
 }

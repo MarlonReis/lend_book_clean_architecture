@@ -9,8 +9,8 @@ import { Either, success, failure } from '../../../src/shared/Either'
 
 const makeEncryptsStub = (): EncryptsPassword => {
     class EncryptsPasswordStub implements EncryptsPassword {
-        encrypt (password: Password): Password {
-            return password
+        encrypt = async (password: Password): Promise<Either<InvalidPasswordError, Password>> => {
+            return await Promise.resolve(success(password))
         }
     }
     return new EncryptsPasswordStub()
@@ -18,7 +18,7 @@ const makeEncryptsStub = (): EncryptsPassword => {
 
 const makeCreateUserAccountRepositoryStub = (): CreateUserAccountRepository => {
     class CreateUserAccountRepositoryStub implements CreateUserAccountRepository {
-        create (user: User): Either<CreateUserAccountError, User> {
+        create = async (user: User): Promise<Either<CreateUserAccountError, User>> => {
             return success(user)
         }
     }
@@ -39,9 +39,9 @@ const makeSutFactory = (): TypeSut => {
 }
 
 describe('DbCreateUserAccount', () => {
-    test('should create new account with success', () => {
+    test('should create new account with success', async () => {
         const { sut } = makeSutFactory()
-        const response = sut.create({
+        const response = await sut.create({
             name: 'Any Name',
             email: 'valid@email.com.br',
             password: 'Any@Password'
@@ -56,9 +56,9 @@ describe('DbCreateUserAccount', () => {
         })
     })
 
-    test('should return failure true when email is invalid', () => {
+    test('should return failure true when email is invalid', async () => {
         const { sut } = makeSutFactory()
-        const response = sut.create({
+        const response = await sut.create({
             name: 'Any Name',
             email: 'valid-email.com.br',
             password: 'Any@Password'
@@ -72,9 +72,9 @@ describe('DbCreateUserAccount', () => {
         })
     })
 
-    test('should return failure true when name is invalid', () => {
+    test('should return failure true when name is invalid', async () => {
         const { sut } = makeSutFactory()
-        const response = sut.create({
+        const response = await sut.create({
             name: 'in',
             email: 'valid@email.com.br',
             password: 'Any@Password'
@@ -88,9 +88,9 @@ describe('DbCreateUserAccount', () => {
         })
     })
 
-    test('should return failure true when password is invalid', () => {
+    test('should return failure true when password is invalid', async () => {
         const { sut } = makeSutFactory()
-        const response = sut.create({
+        const response = await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',
             password: 'invalid'
@@ -104,10 +104,10 @@ describe('DbCreateUserAccount', () => {
         })
     })
 
-    test('should call encrypt with correct param', () => {
+    test('should call encrypt with correct param', async () => {
         const { sut, encryptsStub } = makeSutFactory()
         const encryptSpy = jest.spyOn(encryptsStub, 'encrypt')
-        sut.create({
+        await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',
             password: 'Valid@Password'
@@ -116,10 +116,10 @@ describe('DbCreateUserAccount', () => {
         expect(encryptSpy).toBeCalledWith(password.value)
     })
 
-    test('should call repository with correct param', () => {
+    test('should call repository with correct param', async () => {
         const { sut, createUserAccountRepositoryStub } = makeSutFactory()
         const createSpy = jest.spyOn(createUserAccountRepositoryStub, 'create')
-        sut.create({
+        await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',
             password: 'Valid@Password'
@@ -135,17 +135,17 @@ describe('DbCreateUserAccount', () => {
         })
     })
 
-    test('should return error when repository return', () => {
+    test('should return error when repository return', async () => {
         const { sut, createUserAccountRepositoryStub } = makeSutFactory()
         jest.spyOn(createUserAccountRepositoryStub, 'create')
-        .mockReturnValueOnce(failure(new Error('any message')))
-        const response = sut.create({
+            .mockReturnValueOnce(Promise.resolve(failure(new Error('any message'))))
+        const response = await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',
             password: 'Valid@Password'
         })
 
-       expect(response.isFailure()).toBe(true)
-       expect(response.value).toEqual(new Error('any message'))
+        expect(response.isFailure()).toBe(true)
+        expect(response.value).toEqual(new Error('any message'))
     })
 })

@@ -19,7 +19,7 @@ export class DbCreateUserAccount implements CreateUserAccount {
         this.repository = repository
     }
 
-    create (account: CreateAccount): Either<CreateUserAccountError, User> {
+    async create (account: CreateAccount): Promise<Either<CreateUserAccountError, User>> {
         const nameOrError = Name.create(account.name)
         const emailOrError = Email.create(account.email)
         const passwordOrError = Password.create(account.password)
@@ -36,11 +36,17 @@ export class DbCreateUserAccount implements CreateUserAccount {
             return failure(new CreateUserAccountError(passwordOrError.value))
         }
 
+        const passwordEncrypted = await this.encryptsPassword.encrypt(passwordOrError.value)
+
+        if (passwordEncrypted.isFailure()) {
+            return failure(new CreateUserAccountError(passwordEncrypted.value))
+        }
+
         const name: Name = nameOrError.value
         const email: Email = emailOrError.value
-        const password: Password = this.encryptsPassword.encrypt(passwordOrError.value)
+        const password: Password = passwordEncrypted.value
 
         const user = new User(name, email, password)
-        return this.repository.create(user)
+        return await this.repository.create(user)
     }
 }
