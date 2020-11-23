@@ -1,5 +1,5 @@
 import { Collection } from 'mongodb'
-import { ConnectionDatabaseMongoDb } from '../../../../src/infrastructure/database/mongodb/ConnectionDatabaseMongoDb'
+import { ConnectionDatabaseMongoDb } from '../../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const connection = new ConnectionDatabaseMongoDb(process.env.MONGO_URL)
 
