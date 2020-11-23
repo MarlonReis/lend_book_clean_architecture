@@ -116,6 +116,21 @@ describe('DbCreateUserAccount', () => {
         expect(encryptSpy).toBeCalledWith(password.value)
     })
 
+    test('should return isFailure true when encrypt throws error', async () => {
+        const { sut, encryptsStub } = makeSutFactory()
+        jest.spyOn(encryptsStub, 'encrypt')
+            .mockReturnValueOnce(Promise.resolve(failure(new InvalidPasswordError('pwd'))))
+
+            const response = await sut.create({
+            name: 'Valid Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
+        })
+
+        expect(response.isFailure()).toBe(true)
+        expect(response.value).toEqual(new CreateUserAccountError(new InvalidPasswordError('pwd')))
+    })
+
     test('should call repository with correct param', async () => {
         const { sut, createUserAccountRepositoryStub } = makeSutFactory()
         const createSpy = jest.spyOn(createUserAccountRepositoryStub, 'create')
