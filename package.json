@@ -13,11 +13,14 @@
   "keywords": [],
   "author": "marlon",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^5.0.0"
+  },
   "devDependencies": {
     "@stryker-mutator/core": "^3.3.1",
     "@stryker-mutator/jest-runner": "^3.3.1",
     "@stryker-mutator/typescript": "^3.3.1",
+    "@types/bcrypt": "^3.0.0",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.0.27",
     "@types/supertest": "^2.0.10",
