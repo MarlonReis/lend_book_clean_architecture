@@ -16,4 +16,15 @@ describe('ConnectionDatabaseMongoDb', () => {
         expect(collection).toBeTruthy()
         expect(collection.collectionName).toBe('account')
     })
+
+    test('should get collection by name after reconnect when connection is close', async () => {
+        const collection: Collection = await connection.getCollectionByName('account')
+        expect(collection).toBeTruthy()
+        await connection.close()
+
+        const collectionAfterReconnect: Collection = await connection.getCollectionByName('account')
+
+        expect(collectionAfterReconnect).toBeTruthy()
+        expect(collectionAfterReconnect.collectionName).toBe('account')
+    })
 })
