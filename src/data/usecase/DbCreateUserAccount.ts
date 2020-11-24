@@ -1,7 +1,6 @@
 import { CreateUserAccountError } from '../../domain/errors'
 import { User } from '../../domain/model/user/User'
-import { Name, Password } from '../../domain/object-value'
-import Email from '../../domain/object-value/Email'
+import { Password } from '../../domain/object-value'
 import { CreateAccount, CreateUserAccount } from '../../domain/usecase/CreateUserAccount'
 import { Either, failure } from '../../shared/Either'
 import { EncryptsPassword } from '../protocol/EncryptsPassword'
@@ -20,17 +19,7 @@ export class DbCreateUserAccount implements CreateUserAccount {
     }
 
     async create (account: CreateAccount): Promise<Either<CreateUserAccountError, User>> {
-        const nameOrError = Name.create(account.name)
-        const emailOrError = Email.create(account.email)
         const passwordOrError = Password.create(account.password)
-
-        if (nameOrError.isFailure()) {
-            return failure(new CreateUserAccountError(nameOrError.value))
-        }
-
-        if (emailOrError.isFailure()) {
-            return failure(new CreateUserAccountError(emailOrError.value))
-        }
 
         if (passwordOrError.isFailure()) {
             return failure(new CreateUserAccountError(passwordOrError.value))
@@ -42,11 +31,18 @@ export class DbCreateUserAccount implements CreateUserAccount {
             return failure(new CreateUserAccountError(passwordEncrypted.value))
         }
 
-        const name: Name = nameOrError.value
-        const email: Email = emailOrError.value
         const password: Password = passwordEncrypted.value
 
-        const user = new User(name, email, password)
-        return await this.repository.create(user)
+        const response = User.create({
+            name: account.name,
+            email: account.email,
+            password: password.value
+        })
+
+        if (response.isFailure()) {
+            return failure(new CreateUserAccountError(response.value))
+        }
+
+        return await this.repository.create(response.value)
     }
 }
