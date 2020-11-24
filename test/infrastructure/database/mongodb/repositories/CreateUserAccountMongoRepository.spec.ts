@@ -21,7 +21,6 @@ describe('CreateUserAccountMongoRepository', () => {
         }
 
         const response = await repository.create(createUser.value)
-
         expect(response.isSuccess()).toBe(true)
         expect(response.value).toMatchObject({
             id: { value: expect.anything() },
