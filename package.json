@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles",
-    "test:verbose": "jest --passWithNoTests --silent",
+    "test:verbose": "jest --passWithNoTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test --findRelatedTests",
