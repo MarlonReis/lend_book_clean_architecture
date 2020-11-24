@@ -141,9 +141,11 @@ describe('DbCreateUserAccount', () => {
         })
 
         expect(createSpy).toBeCalledWith({
+            id: undefined,
             name: { value: 'Valid Name' },
             email: { value: 'valid@email.com.br' },
             password: { value: 'Valid@Password' },
+            getIdEntity: expect.any(Function),
             getEmail: expect.any(Function),
             getPassword: expect.any(Function),
             getName: expect.any(Function)
