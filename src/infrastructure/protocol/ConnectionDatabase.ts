@@ -1,4 +1,4 @@
 export interface ConnectionDatabase {
-    open: () => Promise<void>
+    open: (url: string) => Promise<void>
     close: () => Promise<void>
 }
