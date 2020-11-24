@@ -1,0 +1,19 @@
+import { InvalidIdEntityError } from '../../../src/domain/errors'
+import { IdEntity } from '../../../src/domain/object-value'
+
+describe('IdEntity', () => {
+    test('should create IdEntity with valid id', () => {
+        const sut = IdEntity.create('valid-id')
+
+        expect(sut.isSuccess()).toBe(true)
+        expect(sut.value).toMatchObject({
+            value: expect.any(String)
+        })
+    })
+
+    test('should return failure when id undefined', () => {
+        const sut = IdEntity.create(undefined)
+        expect(sut.isFailure()).toBe(true)
+        expect(sut.value).toEqual(new InvalidIdEntityError(undefined))
+    })
+})
