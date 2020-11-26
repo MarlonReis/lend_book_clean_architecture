@@ -6,9 +6,9 @@ module.exports = {
     '!**/domain/model/**',
     '!<rootDir>/test/main/**',
     '!<rootDir>/test/**/*-protocol.ts',
-    '!<rootDir>/test/**/*-protocols.ts',
     '!**/protocols/**',
-    '!**/test/**'
+    '!**/StartServer.*',
+    '!**/main/config/index.*'
   ],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
