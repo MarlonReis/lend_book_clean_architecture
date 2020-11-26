@@ -32,7 +32,8 @@ describe('Create account routers', () => {
             name: 'Any Name',
             email: 'any@email.com.br',
             password: 'Any@Password'
-        }).expect('Content-Type', /json/)
+        })
+            .expect('Content-Type', /json/)
             .expect(500, {
                 error: 'InternalServerError',
                 message: 'Internal server error'

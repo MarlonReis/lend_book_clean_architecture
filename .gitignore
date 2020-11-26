@@ -135,6 +135,6 @@ dist
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
-.history
+.history/
 .ionide
 globalConfig.json
