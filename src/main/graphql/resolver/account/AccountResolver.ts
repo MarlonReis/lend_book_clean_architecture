@@ -8,14 +8,8 @@ import { CreateAccountInput } from './CreateAccountInput'
 export class AccountResolver {
     @Mutation(() => AccountResponse)
     async createUserAccount (@Arg('account') account: CreateAccountInput) {
-        console.log(account)
-
         const controller: Controller = makeCreateUserAccountControllerFactory()
-        const response = await controller.handle({
-            body: {
-                name: account.name, email: account.email, password: account.password
-            }
-        })
+        const response = await controller.handle({ body: account })
         const body = response.body
         return await Promise.resolve({
             name: body.name,
@@ -23,8 +17,13 @@ export class AccountResolver {
         })
     }
 
-    @Query(returns => String)
-    account () {
-        return 'OK'
+    @Query(() => AccountResponse)
+    async getAccountByEmailAndPassword (
+        @Arg('email') email: string,
+        @Arg('password') password: string) {
+        return await Promise.resolve({
+            name: 'Any Name',
+            email: 'any@email.com'
+        })
     }
 }
