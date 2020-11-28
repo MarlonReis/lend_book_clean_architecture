@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-// import core from 'express-serve-static-core'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import Express from 'express'
