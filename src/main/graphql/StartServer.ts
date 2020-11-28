@@ -7,7 +7,7 @@ import { ConnectionDatabaseMongoDb } from '../../infrastructure/database/mongodb
 ConnectionDatabaseMongoDb.getInstance().open(config.mongoUrl)
     .then(async () => {
         const expressApp = await app()
-        expressApp.listen(4000, () =>
-            console.log('🚀 server started on http://localhost:4000/graphql')
+        expressApp.listen(4004, () =>
+            console.log('🚀 server started on http://localhost:4004/graphql')
         )
     }).catch(err => console.log(err.message))

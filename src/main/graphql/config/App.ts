@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import core from 'express-serve-static-core'
+// import core from 'express-serve-static-core'
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import Express from 'express'
@@ -12,7 +12,7 @@ const createSchema = async (): Promise<GraphQLSchema> => await buildSchema({
 
 export const createGraphqlSchema = async (): Promise<GraphQLSchema> => await createSchema()
 
-export const app = async (): Promise<core.Express> => {
+export const app = async (): Promise<any> => {
     const schema = await createSchema()
     const server = new ApolloServer({ schema })
     const app = Express()
