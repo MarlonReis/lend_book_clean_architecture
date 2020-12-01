@@ -1,6 +1,5 @@
 import { Either, failure, success } from '../../shared/Either'
 import { InvalidIdEntityError } from '../errors'
-
 export class IdEntity {
     private readonly value: string
 
@@ -14,5 +13,9 @@ export class IdEntity {
             return success(new IdEntity(id))
         }
         return failure(new InvalidIdEntityError(id))
+    }
+
+    getValue (): string {
+        return this.value
     }
 }

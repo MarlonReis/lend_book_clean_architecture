@@ -15,4 +15,8 @@ export class Name {
     }
     return failure(new InvalidNameError(name))
   }
+
+  getValue (): string {
+    return this.value
+  }
 }
