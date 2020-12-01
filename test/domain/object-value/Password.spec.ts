@@ -6,6 +6,7 @@ describe('Password', () => {
       const result = Password.create('Valid-Password')
       expect(result.isSuccess()).toBe(true)
       expect(result.value).toBeInstanceOf(Password)
+      expect((result.value as any).getValue()).toBe('Valid-Password')
    })
 
    test('should return failure equals true when password is invalid', () => {

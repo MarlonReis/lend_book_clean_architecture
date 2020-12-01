@@ -3,23 +3,24 @@ import { Name } from '../../../src/domain/object-value/Name'
 
 describe('Name', () => {
   test('should be create valid name', () => {
-    const eitherName = Name.create('Any Name')
+    const sut = Name.create('Any Name')
 
-    expect(eitherName.isSuccess()).toBe(true)
-    expect(eitherName.value).toBeInstanceOf(Name)
+    expect(sut.isSuccess()).toBe(true)
+    expect(sut.value).toBeInstanceOf(Name)
+    expect((sut.value as any).getValue()).toBe('Any Name')
   })
 
   test('should return failure when nome have only two characters', () => {
-    const eitherName = Name.create('An')
+    const sut = Name.create('An')
 
-    expect(eitherName.isSuccess()).toBe(false)
-    expect(eitherName.isFailure()).toBe(true)
-    expect(eitherName.value).toBeInstanceOf(InvalidNameError)
+    expect(sut.isSuccess()).toBe(false)
+    expect(sut.isFailure()).toBe(true)
+    expect(sut.value).toBeInstanceOf(InvalidNameError)
   })
 
   test('should return failure when nome undefined', () => {
-    const eitherName = Name.create(undefined)
-    expect(eitherName.isFailure()).toBe(true)
+    const sut = Name.create(undefined)
+    expect(sut.isFailure()).toBe(true)
   })
 
   test('should return name value', () => {

@@ -6,6 +6,7 @@ describe('IdEntity', () => {
         const sut = IdEntity.create('valid-id')
 
         expect(sut.isSuccess()).toBe(true)
+        expect((sut.value as any).getValue()).toBe('valid-id')
         expect(sut.value).toMatchObject({
             value: expect.any(String)
         })

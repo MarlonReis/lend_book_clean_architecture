@@ -7,6 +7,7 @@ describe('Email', () => {
         const result = Email.create('valid@email.com.br')
         expect(result.isSuccess()).toBe(true)
         expect(result.value).toBeInstanceOf(Email)
+        expect((result.value as any).getValue()).toBe('valid@email.com.br')
     })
 
     test('should return email data', () => {
