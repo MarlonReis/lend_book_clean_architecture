@@ -36,4 +36,16 @@ describe('Book', () => {
         expect(sut.isFailure()).toBe(true)
         expect(sut.value).toBeInstanceOf(InvalidTitleError)
     })
+
+    test('should return failure when owner is invalid', () => {
+        const sut = Book.create({
+            title: 'Any Valid',
+            owner: {
+                email: undefined,
+                name: undefined,
+                password: undefined
+            }
+        })
+        expect(sut.isFailure()).toBe(true)
+    })
 })
