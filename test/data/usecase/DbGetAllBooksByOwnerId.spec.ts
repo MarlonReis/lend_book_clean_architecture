@@ -5,22 +5,26 @@ import { Book } from '../../../src/domain/model/book/Book'
 import { IdEntity } from '../../../src/domain/object-value'
 import { Either, success } from '../../../src/shared/Either'
 
+const makeRepository = (): GetAllBooksByOwnerIdRepository => {
+    class GetAllBooksByOwnerIdRepositoryStub implements GetAllBooksByOwnerIdRepository {
+        getByOwnerId = async (id: IdEntity): Promise<Either<NotFoundError, Book[]>> => {
+            const bookOrError = Book.create({
+                title: 'Any Title',
+                owner: {
+                    email: 'any@email.com.br',
+                    name: 'Any Name',
+                    password: 'Password@Valid'
+                }
+            })
+            return await Promise.resolve(success([bookOrError.value as Book]))
+        }
+    }
+    return new GetAllBooksByOwnerIdRepositoryStub()
+}
+
 describe('GetAllBooksByOwnerId', () => {
     test('should get all books by owner id', async () => {
-        class GetAllBooksByOwnerIdRepositoryStub implements GetAllBooksByOwnerIdRepository {
-            getByOwnerId = async (id: IdEntity): Promise<Either<NotFoundError, Book[]>> => {
-                const bookOrError = Book.create({
-                    title: 'Any Title',
-                    owner: {
-                        email: 'any@email.com.br',
-                        name: 'Any Name',
-                        password: 'Password@Valid'
-                    }
-                })
-                return await Promise.resolve(success([bookOrError.value as Book]))
-            }
-        }
-        const repository = new GetAllBooksByOwnerIdRepositoryStub()
+        const repository = makeRepository()
         const sut = new DbGetAllBooksByOwnerId(repository)
         const id = IdEntity.create('valid-id').value as IdEntity
         const response = await sut.getByOwnerId(id)
