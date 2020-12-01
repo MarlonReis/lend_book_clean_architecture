@@ -1,3 +1,4 @@
+import { InvalidNameError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/user/User'
 
 describe('User', () => {
@@ -15,5 +16,16 @@ describe('User', () => {
             email: { value: 'valid@email.com.br' },
             password: { value: 'Valid@Password' }
         })
+    })
+
+    test('should return error when name is invalid', () => {
+        const sut = User.create({
+            email: 'valid@email.com.br',
+            name: 'An',
+            password: 'Valid@Password'
+        })
+
+        expect(sut.isFailure()).toBe(true)
+        expect(sut.value).toBeInstanceOf(InvalidNameError)
     })
 })
