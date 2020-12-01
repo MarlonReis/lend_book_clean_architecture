@@ -26,9 +26,7 @@ const queryGetAccountByEmailAndPassword = `
 
 const apolloServerBase = async () => {
     const schema = await createGraphqlSchema()
-    return new ApolloServerBase({
-        schema
-    })
+    return new ApolloServerBase({ schema })
 }
 
 const connection = ConnectionDatabaseMongoDb.getInstance()
