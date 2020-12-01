@@ -1,5 +1,6 @@
 import { InvalidTitleError } from '../../../src/domain/errors'
 import { Book } from '../../../src/domain/model/book/Book'
+import { User } from '../../../src/domain/model/user/User'
 import { Title } from '../../../src/domain/object-value'
 describe('Book', () => {
     test('should create a book with success', () => {
@@ -17,10 +18,11 @@ describe('Book', () => {
         expect(sut.value).toBeInstanceOf(Book)
         expect(sut.value).toMatchObject({
             title: expect.any(Title),
-            owner: expect.any(Object),
-            getTitle: expect.any(Function),
-            getOwner: expect.any(Function)
+            owner: expect.any(Object)
         })
+
+        expect((sut.value as Book).getOwner()).toBeInstanceOf(User)
+        expect((sut.value as Book).getTitle()).toBeInstanceOf(Title)
     })
 
     test('should return failure when title is invalid', () => {

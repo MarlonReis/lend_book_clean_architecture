@@ -1,5 +1,7 @@
 import { InvalidEmailError, InvalidNameError, InvalidPasswordError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/user/User'
+import { Name, Password } from '../../../src/domain/object-value'
+import Email from '../../../src/domain/object-value/Email'
 
 describe('User', () => {
     test('should create user with success', () => {
@@ -16,6 +18,10 @@ describe('User', () => {
             email: { value: 'valid@email.com.br' },
             password: { value: 'Valid@Password' }
         })
+        expect((sut.value as User).getEmail()).toBeInstanceOf(Email)
+        expect((sut.value as User).getIdEntity()).toBe(undefined)
+        expect((sut.value as User).getName()).toBeInstanceOf(Name)
+        expect((sut.value as User).getPassword()).toBeInstanceOf(Password)
     })
 
     test('should return error when name is invalid', () => {
