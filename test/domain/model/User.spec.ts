@@ -1,4 +1,4 @@
-import { InvalidNameError } from '../../../src/domain/errors'
+import { InvalidEmailError, InvalidNameError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/user/User'
 
 describe('User', () => {
@@ -27,5 +27,16 @@ describe('User', () => {
 
         expect(sut.isFailure()).toBe(true)
         expect(sut.value).toBeInstanceOf(InvalidNameError)
+    })
+
+    test('should return error when email is invalid', () => {
+        const sut = User.create({
+            email: 'valid-email.com.br',
+            name: 'Any Name',
+            password: 'Valid@Password'
+        })
+
+        expect(sut.isFailure()).toBe(true)
+        expect(sut.value).toBeInstanceOf(InvalidEmailError)
     })
 })
