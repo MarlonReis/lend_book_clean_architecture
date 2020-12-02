@@ -8,6 +8,7 @@ export class Balance {
     private constructor (accountId: string, transactionId: string) {
         this.accountId = accountId
         this.transactionId = transactionId
+        Object.freeze(this)
     }
 
     static create (data: any): Either<InvalidBalanceParametersError, Balance> {
