@@ -34,6 +34,7 @@ export class Boleto {
         this.pdf = pdf
         this.visibleBarcode = visibleBarcode
         this.dueDate = dueDate
+        Object.freeze(this)
     }
 
     static create (data: any): Either<InvalidBoletoParametersError, Boleto> {
