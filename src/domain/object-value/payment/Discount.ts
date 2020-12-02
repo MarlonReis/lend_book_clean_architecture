@@ -1,6 +1,14 @@
 import { Either, failure, success } from '../../../shared/Either'
 import { InvalidDiscountParametersError } from '../../errors'
 
+const isInvalid = {
+    accountId: (value: string): boolean => (!value || !(/[0-9]+/.test(value))),
+    conciliationId: (value: string): boolean => (!value || !(/.{2,}/.test(value))),
+    partnerId: (value: string): boolean => (!value || !(/[0-9a-fA-F-]+[0-9a-fA-F]/.test(value))),
+    payableId: (value: string): boolean => (!value || !(/[0-9a-fA-F-]+[0-9a-fA-F]/.test(value)))
+}
+const fields = ['accountId', 'conciliationId', 'partnerId', 'payableId']
+
 export class Discount {
     public readonly accountId: string
     public readonly conciliationId: string
@@ -17,20 +25,11 @@ export class Discount {
     }
 
     static create (data: any): Either<InvalidDiscountParametersError, Discount> {
-        if (!data.accountId || !(/[0-9]+/.test(data.accountId))) {
-            return failure(new InvalidDiscountParametersError('accountId', data.accountId))
-        }
-
-        if (!data.conciliationId || !(/.{2,}/.test(data.conciliationId))) {
-            return failure(new InvalidDiscountParametersError('conciliationId', data.conciliationId))
-        }
-
-        if (!data.partnerId || !(/[0-9a-fA-F-]+[0-9a-fA-F]/.test(data.partnerId))) {
-            return failure(new InvalidDiscountParametersError('partnerId', data.partnerId))
-        }
-
-        if (!data.payableId || !(/[0-9a-fA-F-]+[0-9a-fA-F]/.test(data.payableId))) {
-            return failure(new InvalidDiscountParametersError('payableId', data.payableId))
+        for (const fieldName of fields) {
+            const value = data[fieldName]
+            if (isInvalid[fieldName](value)) {
+                return failure(new InvalidDiscountParametersError(fieldName, value))
+            }
         }
 
         return success(new Discount(data.accountId, data.conciliationId,
