@@ -1,133 +1,90 @@
 import { InvalidDiscountParametersError } from '../../../../src/domain/errors'
 import { Discount } from '../../../../src/domain/object-value/payment/Discount'
 
+const discountData = {
+    accountId: '35619777000113',
+    conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
+    partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
+    payableId: '199'
+}
+
+const responseFailure = (response: any, message: string) => {
+    expect(response.isFailure()).toBe(true)
+    expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
+    expect((response.value as InvalidDiscountParametersError).message)
+        .toBe(message)
+}
+
 describe('Discount', () => {
     test('should return failure when accountId is invalid', () => {
         const response = Discount.create({
-            accountId: 'invalid',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR-35619777000113-20201020-5f8f24c8fa10db0007a4f428',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
+            ...discountData, accountId: 'invalid'
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'accountId' equals 'invalid' is invalid!")
+        responseFailure(response, "'accountId' equals 'invalid' is invalid!")
     })
 
     test('should return failure when accountId is undefined', () => {
         const response = Discount.create({
-            accountId: undefined,
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
+            ...discountData,
+            accountId: undefined
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'accountId' equals 'undefined' is invalid!")
+        responseFailure(response, "'accountId' equals 'undefined' is invalid!")
     })
 
     test('should return failure when conciliationId is empty', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: '',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
+            ...discountData, conciliationId: ''
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'conciliationId' equals '' is invalid!")
+        responseFailure(response, "'conciliationId' equals '' is invalid!")
     })
 
     test('should return failure when conciliationId is undefined', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: undefined,
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
+            ...discountData, conciliationId: undefined
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'conciliationId' equals 'undefined' is invalid!")
+        responseFailure(response, "'conciliationId' equals 'undefined' is invalid!")
     })
 
     test('should return failure when partnerId is invalid', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'invalid',
-            payableId: '199'
+            ...discountData, partnerId: 'invalid'
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'partnerId' equals 'invalid' is invalid!")
+        responseFailure(response, "'partnerId' equals 'invalid' is invalid!")
     })
 
     test('should return failure when partnerId is undefined', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: undefined,
-            payableId: '199'
+            ...discountData, partnerId: undefined
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'partnerId' equals 'undefined' is invalid!")
+        responseFailure(response, "'partnerId' equals 'undefined' is invalid!")
     })
 
     test('should return failure when payableId is invalid', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: 'invalid'
+            ...discountData, payableId: 'invalid'
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'payableId' equals 'invalid' is invalid!")
+        responseFailure(response, "'payableId' equals 'invalid' is invalid!")
     })
 
     test('should return failure when payableId is undefined', () => {
         const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: undefined
+            ...discountData, payableId: undefined
         })
 
-        expect(response.isFailure()).toBe(true)
-        expect(response.value).toBeInstanceOf(InvalidDiscountParametersError)
-        expect((response.value as InvalidDiscountParametersError).message)
-            .toBe("'payableId' equals 'undefined' is invalid!")
+        responseFailure(response, "'payableId' equals 'undefined' is invalid!")
     })
 
     test('should return success', () => {
-        const response = Discount.create({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
-        })
+        const response = Discount.create(discountData)
 
         expect(response.isSuccess()).toBe(true)
-        expect(response.value).toEqual({
-            accountId: '35619777000113',
-            conciliationId: 'fd730533-3b77-4400-864d-55ffd81487ec-PUR',
-            partnerId: 'fd730533-3b77-4400-864d-55ffd81487ec',
-            payableId: '199'
-        })
+        expect(response.value).toEqual(discountData)
     })
 })
