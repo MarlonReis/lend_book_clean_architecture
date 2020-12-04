@@ -51,7 +51,10 @@ describe('GetAllBooksByOwnerId', () => {
             Promise.resolve(failure(new NotFoundError('Any message'))))
 
         const response = await sut.getByOwnerId(id)
-
         expect(response.isFailure()).toBe(true)
+        expect(response.value as NotFoundError).toMatchObject({
+            message: 'Any message',
+            name: 'NotFoundError'
+        })
     })
 })
