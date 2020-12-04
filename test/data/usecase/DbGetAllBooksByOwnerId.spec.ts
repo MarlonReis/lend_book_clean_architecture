@@ -22,10 +22,20 @@ const makeRepository = (): GetAllBooksByOwnerIdRepository => {
     return new GetAllBooksByOwnerIdRepositoryStub()
 }
 
+interface TypeSut {
+    sut: DbGetAllBooksByOwnerId
+    repository: GetAllBooksByOwnerIdRepository
+}
+
+const makeSutFactory = (): TypeSut => {
+    const repository = makeRepository()
+    const sut = new DbGetAllBooksByOwnerId(repository)
+    return { sut, repository }
+}
+
 describe('GetAllBooksByOwnerId', () => {
     test('should get all books by owner id', async () => {
-        const repository = makeRepository()
-        const sut = new DbGetAllBooksByOwnerId(repository)
+        const { sut } = makeSutFactory()
         const id = IdEntity.create('valid-id').value as IdEntity
         const response = await sut.getByOwnerId(id)
 
