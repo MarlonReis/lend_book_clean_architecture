@@ -3,7 +3,7 @@ import { DbGetAllBooksByOwnerId } from '../../../src/data/usecase/DbGetAllBooksB
 import { NotFoundError } from '../../../src/domain/errors'
 import { Book } from '../../../src/domain/model/book/Book'
 import { IdEntity } from '../../../src/domain/object-value'
-import { Either, success } from '../../../src/shared/Either'
+import { Either, success, failure } from '../../../src/shared/Either'
 
 const makeRepository = (): GetAllBooksByOwnerIdRepository => {
     class GetAllBooksByOwnerIdRepositoryStub implements GetAllBooksByOwnerIdRepository {
@@ -41,5 +41,17 @@ describe('GetAllBooksByOwnerId', () => {
 
         expect(response.isSuccess()).toBe(true)
         expect(response.value).toBeInstanceOf(Array)
+    })
+
+    test('should return failure when repository return that not found', async () => {
+        const { sut, repository } = makeSutFactory()
+        const id = IdEntity.create('valid-id').value as IdEntity
+
+        jest.spyOn(repository, 'getByOwnerId').mockReturnValueOnce(
+            Promise.resolve(failure(new NotFoundError('Any message'))))
+
+        const response = await sut.getByOwnerId(id)
+
+        expect(response.isFailure()).toBe(true)
     })
 })
