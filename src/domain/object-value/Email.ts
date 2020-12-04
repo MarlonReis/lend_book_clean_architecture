@@ -17,4 +17,8 @@ export default class Email {
         }
         return failure(new InvalidEmailError(email))
     }
+
+    getValue (): string {
+        return this.value
+    }
 }

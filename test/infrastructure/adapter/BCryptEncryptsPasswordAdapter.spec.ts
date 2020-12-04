@@ -9,10 +9,9 @@ describe('BCryptEncryptsPasswordAdapter', () => {
     beforeAll(() => {
         encrypt = new BCryptEncryptsPasswordAdapter(12)
     })
-
     test('should encrypt password is valid', async () => {
-        const password: Password = { value: 'P4ssW0rd@Valid' }
-        const passwordEncrypted = await encrypt.encrypt(password)
+        const password = Password.create('P4ssW0rd@Valid')
+        const passwordEncrypted = await encrypt.encrypt(password.value as Password)
 
         expect(passwordEncrypted.value).toMatchObject({
             value: expect.any(String)
@@ -24,8 +23,8 @@ describe('BCryptEncryptsPasswordAdapter', () => {
             throw new Error('Any error')
         })
 
-        const password: Password = { value: 'P4ssW0rd@Valid' }
-        const passwordEncrypted = await encrypt.encrypt(password)
+        const password = Password.create('P4ssW0rd@Valid')
+        const passwordEncrypted = await encrypt.encrypt(password.value as Password)
         expect(passwordEncrypted.isFailure()).toBe(true)
     })
 })

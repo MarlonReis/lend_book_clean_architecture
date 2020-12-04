@@ -15,4 +15,8 @@ export class Password {
         }
         return failure(new InvalidPasswordError(password))
     }
+
+    getValue (): string {
+        return this.value
+    }
 }
