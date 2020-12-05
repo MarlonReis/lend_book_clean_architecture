@@ -1,7 +1,5 @@
-import { InvalidEmailError, InvalidNameError, InvalidPasswordError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/user/User'
-import { Name, Password } from '../../../src/domain/object-value'
-import Email from '../../../src/domain/object-value/Email'
+import { InvalidParamError } from '../../../src/domain/errors'
+import { User } from '../../../src/domain/model/User'
 
 describe('User', () => {
     test('should create user with success', () => {
@@ -14,14 +12,10 @@ describe('User', () => {
         expect(sut.isSuccess()).toBe(true)
         expect(sut.value).toBeInstanceOf(User)
         expect(sut.value).toMatchObject({
-            name: { value: 'Any Name' },
-            email: { value: 'valid@email.com.br' },
-            password: { value: 'Valid@Password' }
+            name: 'Any Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
         })
-        expect((sut.value as User).getEmail()).toBeInstanceOf(Email)
-        expect((sut.value as User).getIdEntity()).toBe(undefined)
-        expect((sut.value as User).getName()).toBeInstanceOf(Name)
-        expect((sut.value as User).getPassword()).toBeInstanceOf(Password)
     })
 
     test('should return error when name is invalid', () => {
@@ -32,7 +26,7 @@ describe('User', () => {
         })
 
         expect(sut.isFailure()).toBe(true)
-        expect(sut.value).toBeInstanceOf(InvalidNameError)
+        expect(sut.value).toBeInstanceOf(InvalidParamError)
     })
 
     test('should return error when email is invalid', () => {
@@ -43,7 +37,7 @@ describe('User', () => {
         })
 
         expect(sut.isFailure()).toBe(true)
-        expect(sut.value).toBeInstanceOf(InvalidEmailError)
+        expect(sut.value).toBeInstanceOf(InvalidParamError)
     })
 
     test('should return error when password is invalid', () => {
@@ -54,6 +48,6 @@ describe('User', () => {
         })
 
         expect(sut.isFailure()).toBe(true)
-        expect(sut.value).toBeInstanceOf(InvalidPasswordError)
+        expect(sut.value).toBeInstanceOf(InvalidParamError)
     })
 })

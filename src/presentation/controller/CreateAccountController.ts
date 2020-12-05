@@ -50,6 +50,6 @@ export class CreateAccountController implements Controller {
         }
 
         const { name, email }: any = response.value
-        return ({ statusCode: 201, body: { name: name.value, email: email.value } })
+        return ({ statusCode: 201, body: { name, email } })
     }
 }

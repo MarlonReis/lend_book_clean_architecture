@@ -1,15 +1,14 @@
 import { EncryptsPassword } from '../../../src/data/protocol/EncryptsPassword'
 import { CreateUserAccountRepository } from '../../../src/data/repositories/CreateUserAccountRepository'
 import { DbCreateUserAccount } from '../../../src/data/usecase/DbCreateUserAccount'
-import { CreateUserAccountError, InvalidEmailError, InvalidNameError, InvalidPasswordError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/user/User'
-import { Password } from '../../../src/domain/object-value'
+import { CreateUserAccountError, InvalidParamError, InvalidPasswordError } from '../../../src/domain/errors'
+import { User } from '../../../src/domain/model/User'
 import { CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
 import { Either, success, failure } from '../../../src/shared/Either'
 
 const makeEncryptsStub = (): EncryptsPassword => {
     class EncryptsPasswordStub implements EncryptsPassword {
-        encrypt = async (password: Password): Promise<Either<InvalidPasswordError, Password>> => {
+        encrypt = async (password: string): Promise<Either<InvalidPasswordError, string>> => {
             return await Promise.resolve(success(password))
         }
     }
@@ -50,9 +49,9 @@ describe('DbCreateUserAccount', () => {
         expect(response.isSuccess()).toBe(true)
         expect(response.value).toBeInstanceOf(User)
         expect(response.value).toMatchObject({
-            name: { value: 'Any Name' },
-            email: { value: 'valid@email.com.br' },
-            password: { value: expect.any(String) }
+            name: 'Any Name',
+            email: 'valid@email.com.br',
+            password: expect.any(String)
         })
     })
 
@@ -67,8 +66,8 @@ describe('DbCreateUserAccount', () => {
         expect(response.isFailure()).toBe(true)
         expect(response.value).toBeInstanceOf(CreateUserAccountError)
         expect(response.value).toMatchObject({
-            message: "attribute 'email' equals the valid-email.com.br is invalid!",
-            cause: new InvalidEmailError('valid-email.com.br')
+            message: "Attribute 'email' equals 'valid-email.com.br' is invalid!",
+            cause: new InvalidParamError('email', 'valid-email.com.br')
         })
     })
 
@@ -83,8 +82,8 @@ describe('DbCreateUserAccount', () => {
         expect(response.isFailure()).toBe(true)
         expect(response.value).toBeInstanceOf(CreateUserAccountError)
         expect(response.value).toMatchObject({
-            message: "Attribute 'name' equals in is invalid!",
-            cause: new InvalidNameError('in')
+            message: "Attribute 'name' equals 'in' is invalid!",
+            cause: new InvalidParamError('name', 'in')
         })
     })
 
@@ -99,8 +98,8 @@ describe('DbCreateUserAccount', () => {
         expect(response.isFailure()).toBe(true)
         expect(response.value).toBeInstanceOf(CreateUserAccountError)
         expect(response.value).toMatchObject({
-            message: "Attribute 'password' equals invalid is invalid!",
-            cause: new InvalidPasswordError('invalid')
+            message: "Attribute 'password' equals 'invalid' is invalid!",
+            cause: new InvalidParamError('password', 'invalid')
         })
     })
 
@@ -112,8 +111,8 @@ describe('DbCreateUserAccount', () => {
             email: 'valid@email.com.br',
             password: 'Valid@Password'
         })
-        const password = Password.create('Valid@Password')
-        expect(encryptSpy).toBeCalledWith(password.value)
+        const password = 'Valid@Password'
+        expect(encryptSpy).toBeCalledWith(password)
     })
 
     test('should return isFailure true when encrypt throws error', async () => {
@@ -121,7 +120,7 @@ describe('DbCreateUserAccount', () => {
         jest.spyOn(encryptsStub, 'encrypt')
             .mockReturnValueOnce(Promise.resolve(failure(new InvalidPasswordError('pwd'))))
 
-            const response = await sut.create({
+        const response = await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',
             password: 'Valid@Password'
@@ -142,13 +141,9 @@ describe('DbCreateUserAccount', () => {
 
         expect(createSpy).toBeCalledWith({
             id: undefined,
-            name: { value: 'Valid Name' },
-            email: { value: 'valid@email.com.br' },
-            password: { value: 'Valid@Password' },
-            getIdEntity: expect.any(Function),
-            getEmail: expect.any(Function),
-            getPassword: expect.any(Function),
-            getName: expect.any(Function)
+            name: 'Valid Name',
+            email: 'valid@email.com.br',
+            password: 'Valid@Password'
         })
     })
 

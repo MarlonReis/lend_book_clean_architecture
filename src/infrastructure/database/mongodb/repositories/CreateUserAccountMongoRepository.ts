@@ -1,6 +1,6 @@
 import { CreateUserAccountRepository } from '../../../../data/repositories/CreateUserAccountRepository'
 import { CreateUserAccountError } from '../../../../domain/errors'
-import { User } from '../../../../domain/model/user/User'
+import { User } from '../../../../domain/model/User'
 import { Either, failure, success } from '../../../../shared/Either'
 import { ConnectionDatabaseMongoDb } from '../connection/ConnectionDatabaseMongoDb'
 
@@ -19,9 +19,9 @@ export class CreateUserAccountMongoRepository implements CreateUserAccountReposi
         try {
             const accountCollection = await this.mongoConnection.getCollectionByName('user_account')
             const response = await accountCollection.insertOne({
-                name: user.getName(),
-                email: user.getEmail(),
-                password: user.getPassword()
+                name: user.name,
+                email: user.email,
+                password: user.password
             })
             return success(mapResponse(response.ops[0]))
         } catch (err) {

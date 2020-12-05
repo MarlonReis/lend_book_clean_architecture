@@ -1,6 +1,5 @@
-import { CreateUserAccountError } from '../../domain/errors'
-import { User } from '../../domain/model/user/User'
-import { Password } from '../../domain/object-value'
+import { CreateUserAccountError, InvalidParamError } from '../../domain/errors'
+import { User } from '../../domain/model/User'
 import { CreateAccount, CreateUserAccount } from '../../domain/usecase/CreateUserAccount'
 import { Either, failure } from '../../shared/Either'
 import { EncryptsPassword } from '../protocol/EncryptsPassword'
@@ -19,24 +18,23 @@ export class DbCreateUserAccount implements CreateUserAccount {
     }
 
     async create (account: CreateAccount): Promise<Either<CreateUserAccountError, User>> {
-        const passwordOrError = Password.create(account.password)
-
-        if (passwordOrError.isFailure()) {
-            return failure(new CreateUserAccountError(passwordOrError.value))
+        if ((!account.password || !(/.{8,64}/.test(account.password)))) {
+            const error = new InvalidParamError('password', account.password)
+            return failure(new CreateUserAccountError(error))
         }
 
-        const passwordEncrypted = await this.encryptsPassword.encrypt(passwordOrError.value)
+        const passwordEncrypted = await this.encryptsPassword.encrypt(account.password)
 
         if (passwordEncrypted.isFailure()) {
             return failure(new CreateUserAccountError(passwordEncrypted.value))
         }
 
-        const password: Password = passwordEncrypted.value
+        const password: string = passwordEncrypted.value
 
         const response = User.create({
             name: account.name,
             email: account.email,
-            password: password.value
+            password: password
         })
 
         if (response.isFailure()) {

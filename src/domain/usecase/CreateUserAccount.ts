@@ -1,6 +1,6 @@
 import { Either } from '../../shared/Either'
 import { CreateUserAccountError } from '../errors'
-import { User } from '../model/user/User'
+import { User } from '../model/User'
 
 export interface CreateAccount {
     name: string

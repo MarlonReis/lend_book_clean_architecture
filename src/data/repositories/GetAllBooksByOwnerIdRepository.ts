@@ -1,8 +1,8 @@
 import { NotFoundError } from '../../domain/errors'
-import { Book } from '../../domain/model/book/Book'
-import { IdEntity } from '../../domain/object-value'
+import { Book } from '../../domain/model/Book'
 import { Either } from '../../shared/Either'
+import { DatabaseInternalError } from '../error'
 
 export interface GetAllBooksByOwnerIdRepository {
-    getByOwnerId: (id: IdEntity) => Promise<Either<NotFoundError, Book[]>>
+    getByOwnerId: (id: string) => Promise<Either<NotFoundError | DatabaseInternalError, Book[]>>
 }

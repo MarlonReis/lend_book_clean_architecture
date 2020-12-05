@@ -1,5 +1,5 @@
 import { CreateUserAccountError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/user/User'
+import { User } from '../../../src/domain/model/User'
 import { CreateAccount, CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
 import { CreateAccountController } from '../../../src/presentation/controller/CreateAccountController'
 import { InternalServerError } from '../../../src/presentation/error/InternalServerError'

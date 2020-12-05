@@ -1,5 +1,5 @@
 import { CreateUserAccountError } from '../../../../../src/domain/errors'
-import { User } from '../../../../../src/domain/model/user/User'
+import { User } from '../../../../../src/domain/model/User'
 import { ConnectionDatabaseMongoDb } from '../../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 import { CreateUserAccountMongoRepository } from '../../../../../src/infrastructure/database/mongodb/repositories/CreateUserAccountMongoRepository'
 
@@ -16,17 +16,13 @@ describe('CreateUserAccountMongoRepository', () => {
             password: 'AnyValidPassword'
         })
 
-        if (createUser.isFailure()) {
-            fail("Shouldn't have come here")
-        }
-
-        const response = await repository.create(createUser.value)
+        const response = await repository.create(createUser.value as User)
         expect(response.isSuccess()).toBe(true)
         expect(response.value).toMatchObject({
-            id: { value: expect.anything() },
-            name: { value: 'Any Name' },
-            email: { value: 'valid@any-email.com' },
-            password: { value: expect.any(String) }
+            id: expect.anything(),
+            name: 'Any Name',
+            email: 'valid@any-email.com',
+            password: expect.any(String)
         })
     })
 
@@ -40,11 +36,7 @@ describe('CreateUserAccountMongoRepository', () => {
             password: 'AnyValidPassword'
         })
 
-        if (createUser.isFailure()) {
-            fail("Shouldn't have come here")
-        }
-
-        const response = await repository.create(createUser.value)
+        const response = await repository.create(createUser.value as User)
         expect(response.isFailure()).toBe(true)
         expect(response.value).toBeInstanceOf(CreateUserAccountError)
     })
