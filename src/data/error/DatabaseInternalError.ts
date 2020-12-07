@@ -5,6 +5,5 @@ export class DatabaseInternalError extends Error {
         super(error.message)
         this.cause = error
         this.name = 'DatabaseInternalError'
-        Object.freeze(this)
     }
 }
