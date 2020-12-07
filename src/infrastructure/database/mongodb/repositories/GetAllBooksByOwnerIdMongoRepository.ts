@@ -30,8 +30,7 @@ export class GetAllBooksByOwnerIdMongoRepository implements GetAllBooksByOwnerId
 
             return failure(new NotFoundError(`Not found book(s) by owner id equals '${id}'`))
         } catch (err) {
-            console.log(err.stack)
-            return failure(new DatabaseInternalError(err.message))
+            return failure(new DatabaseInternalError(err))
         }
     }
 }
