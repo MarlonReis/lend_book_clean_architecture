@@ -76,7 +76,7 @@ describe('CreateAccountController', () => {
 
         expect(response).toEqual({
             statusCode: 500,
-            body: new InternalServerError()
+            body: new InternalServerError(error.value)
         })
     })
 
