@@ -46,7 +46,7 @@ export class CreateAccountController implements Controller {
 
         const response = await this.createAccount.create(httpRequest.body)
         if (response.isFailure()) {
-            return internalServerError()
+            return internalServerError(response.value)
         }
 
         const { name, email }: any = response.value
