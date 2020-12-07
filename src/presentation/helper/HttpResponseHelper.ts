@@ -6,7 +6,12 @@ export const unProcessableEntity = (error: Error): HttpResponse => ({
     body: error
 })
 
-export const internalServerError = (): HttpResponse => ({
+export const internalServerError = (causeError: Error): HttpResponse => ({
     statusCode: 500,
-    body: new InternalServerError()
+    body: new InternalServerError(causeError)
+})
+
+export const badRequest = (error: Error): HttpResponse => ({
+    statusCode: 400,
+    body: error
 })

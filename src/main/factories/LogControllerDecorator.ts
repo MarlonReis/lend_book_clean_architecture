@@ -11,7 +11,17 @@ export class LogControllerDecorator implements Controller {
     handle = async (httpRequest: HttpRequest): Promise<HttpResponse> => {
         const response = await this.controller.handle(httpRequest)
         if (response.statusCode !== 200 && response.statusCode !== 201) {
-            console.log(response)
+            const { message, name, stack, cause } = response.body
+
+            console.log('LogControllerDecorator', {
+                status: response.statusCode,
+                body: {
+                    name,
+                    message,
+                    cause,
+                    stack
+                }
+            })
         }
         return response
     }
