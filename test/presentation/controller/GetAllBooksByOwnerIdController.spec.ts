@@ -2,7 +2,7 @@ import { NotFoundError } from '../../../src/domain/errors'
 import { Book } from '../../../src/domain/model/Book'
 import { GetAllBooksByOwnerId } from '../../../src/domain/usecase/GetAllBooksByOwnerId'
 import { GetAllBooksByOwnerIdController } from '../../../src/presentation/controller/GetAllBooksByOwnerIdController'
-import { InternalServerError } from '../../../src/presentation/error/InternalServerError'
+import { internalServerError } from '../../../src/presentation/helper/HttpResponseHelper'
 import { Controller } from '../../../src/presentation/protocol/Controller'
 import { Either, failure, success } from '../../../src/shared/Either'
 
@@ -55,11 +55,7 @@ describe('GetAllBooksByOwnerIdController', () => {
             .mockReturnValueOnce(Promise.resolve(error))
 
         const response = await sut.handle({ params: { id: 'valid-id' } })
-
-        expect(response).toEqual({
-            statusCode: 500,
-            body: new InternalServerError(error.value)
-        })
+        expect(response).toEqual(internalServerError(error.value as Error))
     })
 
     test('should return failure when use case throws error', async () => {
