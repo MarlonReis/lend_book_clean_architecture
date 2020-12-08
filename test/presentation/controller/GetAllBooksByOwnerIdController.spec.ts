@@ -61,4 +61,19 @@ describe('GetAllBooksByOwnerIdController', () => {
             body: new InternalServerError(error.value)
         })
     })
+
+    test('should return failure when use case throws error', async () => {
+        const { sut, getAllBooksByOwnerIdSut } = makeSutFactory()
+        const error = failure<any, any>(new NotFoundError('Any message'))
+
+        jest.spyOn(getAllBooksByOwnerIdSut, 'getByOwnerId')
+            .mockReturnValueOnce(Promise.resolve(error))
+
+        const response = await sut.handle({ params: { id: 'valid-id' } })
+
+        expect(response).toEqual({
+            statusCode: 404,
+            body: new NotFoundError((error.value as Error).message)
+        })
+    })
 })
