@@ -2,8 +2,9 @@ import { NotFoundError } from '../../../src/domain/errors'
 import { Book } from '../../../src/domain/model/Book'
 import { GetAllBooksByOwnerId } from '../../../src/domain/usecase/GetAllBooksByOwnerId'
 import { GetAllBooksByOwnerIdController } from '../../../src/presentation/controller/GetAllBooksByOwnerIdController'
+import { InternalServerError } from '../../../src/presentation/error/InternalServerError'
 import { Controller } from '../../../src/presentation/protocol/Controller'
-import { Either, success } from '../../../src/shared/Either'
+import { Either, failure, success } from '../../../src/shared/Either'
 
 const makeGetAllBooksByOwnerIdFactory = (): GetAllBooksByOwnerId => {
     class GetAllBooksByOwnerIdStub implements GetAllBooksByOwnerId {
@@ -44,5 +45,20 @@ describe('GetAllBooksByOwnerIdController', () => {
                 })
             ])
         )
+    })
+
+    test('should return failure when use case throws error', async () => {
+        const { sut, getAllBooksByOwnerIdSut } = makeSutFactory()
+        const error = failure<any, any>(new Error('Any message'))
+
+        jest.spyOn(getAllBooksByOwnerIdSut, 'getByOwnerId')
+            .mockReturnValueOnce(Promise.resolve(error))
+
+        const response = await sut.handle({ params: { id: 'valid-id' } })
+
+        expect(response).toEqual({
+            statusCode: 500,
+            body: new InternalServerError(error.value)
+        })
     })
 })
