@@ -2,14 +2,14 @@ import { CreateUserAccountError } from '../../../src/domain/errors'
 import { User } from '../../../src/domain/model/User'
 import { CreateAccount, CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
 import { CreateAccountController } from '../../../src/presentation/controller/CreateAccountController'
-import { InternalServerError } from '../../../src/presentation/error/InternalServerError'
 import { MissingParamError } from '../../../src/presentation/error/MissingParamError'
+import { internalServerError, unProcessableEntity } from '../../../src/presentation/helper/HttpResponseHelper'
 import { Either, failure } from '../../../src/shared/Either'
 
 const makeCreateAccountStubFactory = (): CreateUserAccount => {
     class CreateAccountStub implements CreateUserAccount {
         create = async (account: CreateAccount): Promise<Either<CreateUserAccountError, User>> => {
-            const createUser = User.create({
+            const createUser: Either<any, any> = User.create({
                 name: 'Any Name',
                 email: 'any@name.com.br',
                 password: 'P4ssw0rd@Valid'
@@ -34,7 +34,7 @@ const makeSutFactory = (): TypeSut => {
 describe('CreateAccountController', () => {
     test('should return statusCode 201 when create with success', async () => {
         const { sut, createAccountStub } = makeSutFactory()
-        const createUser = User.create({
+        const createUser: Either<any, any> = User.create({
             name: 'Any Name',
             email: 'any@email.com.br',
             password: 'PasswordValid'
@@ -74,10 +74,7 @@ describe('CreateAccountController', () => {
             }
         })
 
-        expect(response).toEqual({
-            statusCode: 500,
-            body: new InternalServerError(error.value)
-        })
+        expect(response).toEqual(internalServerError(error.value))
     })
 
     test('should return statusCode 422 when params name is undefined', async () => {
@@ -118,10 +115,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { name: 'Any Name', email: 'valid-invalid', password: 'PasswordValid' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('email')
-        })
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('email')))
     })
 
     test('should return statusCode 422 when params password is undefined', async () => {
@@ -129,10 +123,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { name: 'Any Name', email: 'valid@email.com' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('password')
-        })
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('password')))
     })
 
     test('should return statusCode 422 when params password is invalid', async () => {
@@ -140,9 +131,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { name: 'Any Name', email: 'valid@email.com', password: 'invalid' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('password')
-        })
+
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('password')))
     })
 })
