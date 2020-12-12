@@ -82,10 +82,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { email: 'any@email.com.br', password: 'PasswordValid' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('name')
-        })
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('name')))
     })
 
     test('should return statusCode 422 when params name is invalid', async () => {
@@ -93,10 +90,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { name: 'in', email: 'any@email.com.br', password: 'PasswordValid' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('name')
-        })
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('name')))
     })
 
     test('should return statusCode 422 when params email is undefined', async () => {
@@ -104,10 +98,7 @@ describe('CreateAccountController', () => {
         const response = await sut.handle({
             body: { name: 'Any Name', password: 'PasswordValid' }
         })
-        expect(response).toEqual({
-            statusCode: 422,
-            body: new MissingParamError('email')
-        })
+        expect(response).toEqual(unProcessableEntity(new MissingParamError('email')))
     })
 
     test('should return statusCode 422 when params email is invalid', async () => {
