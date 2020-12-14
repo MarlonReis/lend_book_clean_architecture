@@ -31,6 +31,7 @@ describe('GetAllBooksByOwnerId', () => {
             ownerId: '3baa191c-364e-11eb-adc1-0242ac120002'
         })
     })
+
     afterAll(async () => await connection.close())
 
     beforeEach(async () => {
@@ -51,6 +52,21 @@ describe('GetAllBooksByOwnerId', () => {
             expect.objectContaining({
                 id: expect.any(String),
                 title: 'Any title'
+            })
+        ]))
+    })
+
+    test('should return message error when not found by id', async () => {
+        const response = await runQuery({
+            query: queryGetAllBooksByOwnerId,
+            variables: {
+                ownerId: '3baa191c-364e-11eb-adc1-0242ac128702'
+            }
+        })
+
+        expect(response.errors).toEqual(expect.arrayContaining([
+            expect.objectContaining({
+                message: "Not found book(s) by owner id equals '3baa191c-364e-11eb-adc1-0242ac128702'"
             })
         ]))
     })
