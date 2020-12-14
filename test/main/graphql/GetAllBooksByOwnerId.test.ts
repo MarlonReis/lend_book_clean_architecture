@@ -22,7 +22,15 @@ const connection = ConnectionDatabaseMongoDb.getInstance()
 describe('GetAllBooksByOwnerId', () => {
     let runQuery: any
 
-    beforeAll(async () => await connection.open(process.env.MONGO_URL))
+    beforeAll(async () => {
+        await connection.open(process.env.MONGO_URL)
+
+        const collection = await connection.getCollectionByName('books')
+        await collection.insertOne({
+            title: 'Any title',
+            ownerId: '3baa191c-364e-11eb-adc1-0242ac120002'
+        })
+    })
     afterAll(async () => await connection.close())
 
     beforeEach(async () => {
@@ -32,12 +40,6 @@ describe('GetAllBooksByOwnerId', () => {
     })
 
     test('should return all books', async () => {
-        const collection = await connection.getCollectionByName('books')
-        await collection.insertOne({
-            title: 'Any title',
-            ownerId: '3baa191c-364e-11eb-adc1-0242ac120002'
-        })
-
         const response = await runQuery({
             query: queryGetAllBooksByOwnerId,
             variables: {
