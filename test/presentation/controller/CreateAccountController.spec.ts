@@ -60,7 +60,7 @@ describe('CreateAccountController', () => {
         })
     })
 
-    test('should return statusCode 400 when not create', async () => {
+    test('should return statusCode 500 when not create', async () => {
         const { sut, createAccountStub } = makeSutFactory()
         const error = failure<any, any>(new CreateUserAccountError(new Error('Any message')))
         jest.spyOn(createAccountStub, 'create')

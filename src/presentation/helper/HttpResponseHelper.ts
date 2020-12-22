@@ -10,8 +10,3 @@ export const internalServerError = (causeError: Error): HttpResponse => ({
     statusCode: 500,
     body: new InternalServerError(causeError)
 })
-
-export const badRequest = (error: Error): HttpResponse => ({
-    statusCode: 400,
-    body: error
-})
