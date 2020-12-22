@@ -32,6 +32,13 @@ describe('ConnectionDatabaseMongoDb', () => {
         await connection.close()
         expect(connection.isConnected()).toBe(false)
     })
+
+    test('should isConnected return false when mongo client is undefined ', async () => {
+        (ConnectionDatabaseMongoDb.getInstance() as any).mongoClient = undefined
+        const connection = ConnectionDatabaseMongoDb.getInstance()
+        expect(connection.isConnected()).toBe(false)
+    })
+
     test('should isConnected return true when have connection ', async () => {
         await connection.open(process.env.MONGO_URL)
         expect(connection.isConnected()).toBe(true)
