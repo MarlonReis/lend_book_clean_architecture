@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServerBase } from 'apollo-server-core'
-import { createGraphqlSchema } from '../../../src/main/graphql/config/App'
+import { createGraphqlSchema, app } from '../../../src/main/graphql/config/App'
 import { ConnectionDatabaseMongoDb } from '../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const mutationCreateAccount = `
@@ -43,6 +43,11 @@ describe('CreateUserAccount', () => {
         const { mutate, query } = createTestClient(server)
         runMutate = mutate
         runQuery = query
+    })
+
+    test('should define app', async () => {
+        const application = await app()
+        expect(application).toBeTruthy()
     })
 
     test('should create a new account', async () => {
