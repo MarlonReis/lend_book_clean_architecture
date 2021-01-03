@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../shared/Either'
-import { InvalidIdEntityError } from '../errors'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidIdEntityError } from '@/domain/errors'
 export class IdEntity {
     private readonly value: string
 

@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../shared/Either'
-import { InvalidPasswordError } from '../errors'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidPasswordError } from '@/domain/errors'
 
 export class Password {
     public readonly value: string

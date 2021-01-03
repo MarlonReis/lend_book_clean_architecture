@@ -1,5 +1,5 @@
-import { InvalidParamError } from '../errors'
-import { Either, failure, success } from '../../shared/Either'
+import { InvalidParamError } from '@/domain/errors'
+import { Either, failure, success } from '@/shared/Either'
 
 export class Book {
     public readonly id: string

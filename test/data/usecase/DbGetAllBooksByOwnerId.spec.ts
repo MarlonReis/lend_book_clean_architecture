@@ -1,8 +1,8 @@
-import { GetAllBooksByOwnerIdRepository } from '../../../src/data/repositories/GetAllBooksByOwnerIdRepository'
-import { DbGetAllBooksByOwnerId } from '../../../src/data/usecase/DbGetAllBooksByOwnerId'
-import { NotFoundError } from '../../../src/domain/errors'
-import { Book } from '../../../src/domain/model/Book'
-import { Either, success, failure } from '../../../src/shared/Either'
+import { GetAllBooksByOwnerIdRepository } from '@/data/repositories/GetAllBooksByOwnerIdRepository'
+import { DbGetAllBooksByOwnerId } from '@/data/usecase/DbGetAllBooksByOwnerId'
+import { NotFoundError } from '@/domain/errors'
+import { Book } from '@/domain/model/Book'
+import { Either, success, failure } from '@/shared/Either'
 
 const makeRepository = (): GetAllBooksByOwnerIdRepository => {
     class GetAllBooksByOwnerIdRepositoryStub implements GetAllBooksByOwnerIdRepository {

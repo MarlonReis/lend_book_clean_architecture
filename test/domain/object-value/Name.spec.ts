@@ -1,5 +1,5 @@
-import { InvalidNameError } from '../../../src/domain/errors'
-import { Name } from '../../../src/domain/object-value/Name'
+import { InvalidNameError } from '@/domain/errors'
+import { Name } from '@/domain/object-value/Name'
 
 describe('Name', () => {
   test('should be create valid name', () => {

@@ -1,5 +1,5 @@
-import { InvalidTitleError } from '../../../src/domain/errors'
-import { Title } from '../../../src/domain/object-value'
+import { InvalidTitleError } from '@/domain/errors'
+import { Title } from '@/domain/object-value'
 
 describe('Title', () => {
     test('should create title', () => {

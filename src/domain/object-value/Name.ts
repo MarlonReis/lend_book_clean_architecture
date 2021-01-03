@@ -1,5 +1,5 @@
-import { Either, success, failure } from '../../shared/Either'
-import { InvalidNameError } from '../errors'
+import { Either, success, failure } from '@/shared/Either'
+import { InvalidNameError } from '@/domain/errors'
 
 export class Name {
   public readonly value: string

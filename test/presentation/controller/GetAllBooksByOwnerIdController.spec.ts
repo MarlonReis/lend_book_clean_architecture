@@ -1,11 +1,11 @@
-import { NotFoundError } from '../../../src/domain/errors'
-import { Book } from '../../../src/domain/model/Book'
-import { GetAllBooksByOwnerId } from '../../../src/domain/usecase/GetAllBooksByOwnerId'
-import { GetAllBooksByOwnerIdController } from '../../../src/presentation/controller/GetAllBooksByOwnerIdController'
+import { NotFoundError } from '@/domain/errors'
+import { Book } from '@/domain/model/Book'
+import { GetAllBooksByOwnerId } from '@/domain/usecase/GetAllBooksByOwnerId'
+import { GetAllBooksByOwnerIdController } from '@/presentation/controller/GetAllBooksByOwnerIdController'
 
-import { internalServerError } from '../../../src/presentation/helper/HttpResponseHelper'
-import { Controller } from '../../../src/presentation/protocol/Controller'
-import { Either, failure, success } from '../../../src/shared/Either'
+import { internalServerError } from '@/presentation/helper/HttpResponseHelper'
+import { Controller } from '@/presentation/protocol/Controller'
+import { Either, failure, success } from '@/shared/Either'
 
 const makeGetAllBooksByOwnerIdFactory = (): GetAllBooksByOwnerId => {
     class GetAllBooksByOwnerIdStub implements GetAllBooksByOwnerId {

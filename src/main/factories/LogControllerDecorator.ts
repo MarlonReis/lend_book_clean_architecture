@@ -1,5 +1,5 @@
-import { Controller } from '../../presentation/protocol/Controller'
-import { HttpRequest, HttpResponse } from '../../presentation/protocol/Http'
+import { Controller } from '@/presentation/protocol/Controller'
+import { HttpRequest, HttpResponse } from '@/presentation/protocol/Http'
 
 export class LogControllerDecorator implements Controller {
     private readonly controller: Controller

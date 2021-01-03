@@ -1,5 +1,5 @@
-import { InvalidBalanceParametersError } from '../../../../src/domain/errors'
-import { Balance } from '../../../../src/domain/object-value/payment/Balance'
+import { InvalidBalanceParametersError } from '@/domain/errors'
+import { Balance } from '@/domain/object-value/payment/Balance'
 
 const invalidResponse = (result: any, message: string) => {
     expect(result.isFailure()).toBe(true)

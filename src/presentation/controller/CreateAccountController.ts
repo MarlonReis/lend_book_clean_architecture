@@ -1,8 +1,8 @@
-import { CreateUserAccount } from '../../domain/usecase/CreateUserAccount'
-import { MissingParamError } from '../error/MissingParamError'
-import { unProcessableEntity, internalServerError } from '../helper/HttpResponseHelper'
-import { Controller } from '../protocol/Controller'
-import { HttpRequest, HttpResponse } from '../protocol/Http'
+import { CreateUserAccount } from '@/domain/usecase/CreateUserAccount'
+import { MissingParamError } from '@/presentation/error/MissingParamError'
+import { unProcessableEntity, internalServerError } from '@/presentation/helper/HttpResponseHelper'
+import { Controller } from '@/presentation/protocol/Controller'
+import { HttpRequest, HttpResponse } from '@/presentation/protocol/Http'
 
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 

@@ -1,7 +1,7 @@
-import { CreateUserAccountError } from '../../../../../src/domain/errors'
-import { User } from '../../../../../src/domain/model/User'
-import { ConnectionDatabaseMongoDb } from '../../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
-import { CreateUserAccountMongoRepository } from '../../../../../src/infrastructure/database/mongodb/repositories/CreateUserAccountMongoRepository'
+import { CreateUserAccountError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { CreateUserAccountMongoRepository } from '@/infrastructure/database/mongodb/repositories/CreateUserAccountMongoRepository'
 
 describe('CreateUserAccountMongoRepository', () => {
     beforeAll(async () => await ConnectionDatabaseMongoDb.getInstance().open(process.env.MONGO_URL))

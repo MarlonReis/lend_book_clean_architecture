@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import { EncryptsPassword } from '../../data/protocol/EncryptsPassword'
-import { InvalidPasswordError } from '../../domain/errors'
-import { Either, failure, success } from '../../shared/Either'
+import { EncryptsPassword } from '@/data/protocol/EncryptsPassword'
+import { InvalidPasswordError } from '@/domain/errors'
+import { Either, failure, success } from '@/shared/Either'
 
 export class BCryptEncryptsPasswordAdapter implements EncryptsPassword {
     private readonly saltOrRounds: number

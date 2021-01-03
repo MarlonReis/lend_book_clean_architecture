@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../../shared/Either'
-import { InvalidBalanceParametersError } from '../../errors'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidBalanceParametersError } from '@/domain/errors'
 
 export class Balance {
     public readonly accountId: string

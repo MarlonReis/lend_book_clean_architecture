@@ -1,8 +1,8 @@
-import { NotFoundError } from '../../domain/errors'
-import { Book } from '../../domain/model/Book'
-import { GetAllBooksByOwnerId } from '../../domain/usecase/GetAllBooksByOwnerId'
-import { Either } from '../../shared/Either'
-import { GetAllBooksByOwnerIdRepository } from '../repositories/GetAllBooksByOwnerIdRepository'
+import { NotFoundError } from '@/domain/errors'
+import { Book } from '@/domain/model/Book'
+import { GetAllBooksByOwnerId } from '@/domain/usecase/GetAllBooksByOwnerId'
+import { Either } from '@/shared/Either'
+import { GetAllBooksByOwnerIdRepository } from '@/data/repositories/GetAllBooksByOwnerIdRepository'
 
 export class DbGetAllBooksByOwnerId implements GetAllBooksByOwnerId {
     private readonly repository: GetAllBooksByOwnerIdRepository

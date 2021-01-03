@@ -1,6 +1,6 @@
 import app from './config/App'
-import { ConnectionDatabaseMongoDb } from '../../infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
-import config from '../config'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import config from '@/main/config'
 
 ConnectionDatabaseMongoDb.getInstance().open(config.mongoUrl)
     .then(() => {

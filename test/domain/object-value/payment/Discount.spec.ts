@@ -1,5 +1,5 @@
-import { InvalidDiscountParametersError } from '../../../../src/domain/errors'
-import { Discount } from '../../../../src/domain/object-value/payment/Discount'
+import { InvalidDiscountParametersError } from '@/domain/errors'
+import { Discount } from '@/domain/object-value/payment/Discount'
 
 const discountData = {
     accountId: '35619777000113',

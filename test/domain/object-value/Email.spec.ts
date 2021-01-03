@@ -1,6 +1,6 @@
-import { InvalidEmailError } from '../../../src/domain/errors'
-import Email from '../../../src/domain/object-value/Email'
-import { Either } from '../../../src/shared/Either'
+import { InvalidEmailError } from '@/domain/errors'
+import Email from '@/domain/object-value/Email'
+import { Either } from '@/shared/Either'
 
 describe('Email', () => {
     test('should create valid email', () => {

@@ -1,5 +1,5 @@
 import { Collection } from 'mongodb'
-import { ConnectionDatabaseMongoDb } from '../../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const connection = ConnectionDatabaseMongoDb.getInstance()
 

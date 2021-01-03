@@ -1,6 +1,6 @@
 import request from 'supertest'
-import app from '../../../../src/main/express/config/App'
-import { ConnectionDatabaseMongoDb } from '../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import app from '@/main/express/config/App'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const connection = ConnectionDatabaseMongoDb.getInstance()
 let booksCollection

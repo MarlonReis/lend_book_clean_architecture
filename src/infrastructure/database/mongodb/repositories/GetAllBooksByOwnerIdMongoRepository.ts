@@ -1,9 +1,9 @@
-import { DatabaseInternalError } from '../../../../data/error'
-import { GetAllBooksByOwnerIdRepository } from '../../../../data/repositories/GetAllBooksByOwnerIdRepository'
-import { NotFoundError } from '../../../../domain/errors'
-import { Book } from '../../../../domain/model/Book'
-import { Either, failure, success } from '../../../../shared/Either'
+import { Book } from '@/domain/model/Book'
+import { NotFoundError } from '@/domain/errors'
+import { DatabaseInternalError } from '@/data/error'
+import { Either, failure, success } from '@/shared/Either'
 import { ConnectionDatabaseMongoDb } from '../connection/ConnectionDatabaseMongoDb'
+import { GetAllBooksByOwnerIdRepository } from '@/data/repositories/GetAllBooksByOwnerIdRepository'
 
 const responseMap = (response: any): Book[] =>
     response.map((book: any) => Book.create({

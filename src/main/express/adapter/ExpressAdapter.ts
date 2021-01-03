@@ -1,7 +1,7 @@
-import { Controller } from '../../../presentation/protocol/Controller'
-
 import { Request, Response } from 'express'
-import { HttpRequest, HttpResponse } from '../../../presentation/protocol/Http'
+
+import { Controller } from '@/presentation/protocol/Controller'
+import { HttpRequest, HttpResponse } from '@/presentation/protocol/Http'
 
 export const expressAdapter = (controller: Controller) => {
     return async (req: Request, res: Response): Promise<any> => {

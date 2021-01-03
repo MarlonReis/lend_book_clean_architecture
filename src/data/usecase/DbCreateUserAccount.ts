@@ -1,9 +1,9 @@
-import { CreateUserAccountError, InvalidParamError } from '../../domain/errors'
-import { User } from '../../domain/model/User'
-import { CreateAccount, CreateUserAccount } from '../../domain/usecase/CreateUserAccount'
-import { Either, failure } from '../../shared/Either'
-import { EncryptsPassword } from '../protocol/EncryptsPassword'
-import { CreateUserAccountRepository } from '../repositories/CreateUserAccountRepository'
+import { CreateUserAccountError, InvalidParamError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
+import { CreateAccount, CreateUserAccount } from '@/domain/usecase/CreateUserAccount'
+import { Either, failure } from '@/shared/Either'
+import { EncryptsPassword } from '@/data/protocol/EncryptsPassword'
+import { CreateUserAccountRepository } from '@/data/repositories/CreateUserAccountRepository'
 
 export class DbCreateUserAccount implements CreateUserAccount {
     private readonly encryptsPassword: EncryptsPassword

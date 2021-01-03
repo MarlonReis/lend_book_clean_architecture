@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../../shared/Either'
-import { InvalidDiscountParametersError } from '../../errors'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidDiscountParametersError } from '@/domain/errors'
 
 const isInvalid = {
     accountId: (value: string): boolean => (!value || !(/[0-9]+/.test(value))),

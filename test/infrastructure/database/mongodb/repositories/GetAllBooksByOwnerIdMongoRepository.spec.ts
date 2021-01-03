@@ -1,7 +1,7 @@
-import { DatabaseInternalError } from '../../../../../src/data/error'
-import { NotFoundError } from '../../../../../src/domain/errors'
-import { ConnectionDatabaseMongoDb } from '../../../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
-import { GetAllBooksByOwnerIdMongoRepository } from '../../../../../src/infrastructure/database/mongodb/repositories/GetAllBooksByOwnerIdMongoRepository'
+import { DatabaseInternalError } from '@/data/error'
+import { NotFoundError } from '@/domain/errors'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { GetAllBooksByOwnerIdMongoRepository } from '@/infrastructure/database/mongodb/repositories/GetAllBooksByOwnerIdMongoRepository'
 
 describe('GetAllBooksByOwnerIdMongoRepository', () => {
     beforeAll(async () => await ConnectionDatabaseMongoDb.getInstance().open(process.env.MONGO_URL))

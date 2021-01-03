@@ -1,5 +1,6 @@
-import { InvalidParamError } from '../../../src/domain/errors'
-import { Book } from '../../../src/domain/model/Book'
+import { InvalidParamError } from '@/domain/errors'
+import { Book } from '@/domain/model/Book'
+
 describe('Book', () => {
     test('should create a book with success', () => {
         const sut = Book.create({

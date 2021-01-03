@@ -1,7 +1,7 @@
-import { GetAllBooksByOwnerId } from '../../domain/usecase/GetAllBooksByOwnerId'
-import { internalServerError } from '../helper/HttpResponseHelper'
-import { Controller } from '../protocol/Controller'
-import { HttpRequest, HttpResponse } from '../protocol/Http'
+import { GetAllBooksByOwnerId } from '@/domain/usecase/GetAllBooksByOwnerId'
+import { internalServerError } from '@/presentation/helper/HttpResponseHelper'
+import { Controller } from '@/presentation/protocol/Controller'
+import { HttpRequest, HttpResponse } from '@/presentation/protocol/Http'
 
 export class GetAllBooksByOwnerIdController implements Controller {
     private readonly getAllBooksByOwnerId: GetAllBooksByOwnerId

@@ -1,10 +1,10 @@
-import { CreateUserAccountError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/User'
-import { CreateAccount, CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
-import { CreateAccountController } from '../../../src/presentation/controller/CreateAccountController'
-import { MissingParamError } from '../../../src/presentation/error/MissingParamError'
-import { internalServerError, unProcessableEntity } from '../../../src/presentation/helper/HttpResponseHelper'
-import { Either, failure } from '../../../src/shared/Either'
+import { CreateUserAccountError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
+import { CreateAccount, CreateUserAccount } from '@/domain/usecase/CreateUserAccount'
+import { CreateAccountController } from '@/presentation/controller/CreateAccountController'
+import { MissingParamError } from '@/presentation/error/MissingParamError'
+import { internalServerError, unProcessableEntity } from '@/presentation/helper/HttpResponseHelper'
+import { Either, failure } from '@/shared/Either'
 
 const makeCreateAccountStubFactory = (): CreateUserAccount => {
     class CreateAccountStub implements CreateUserAccount {

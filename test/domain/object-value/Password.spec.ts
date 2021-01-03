@@ -1,5 +1,5 @@
-import { InvalidPasswordError } from '../../../src/domain/errors'
-import { Password } from '../../../src/domain/object-value'
+import { InvalidPasswordError } from '@/domain/errors'
+import { Password } from '@/domain/object-value'
 
 describe('Password', () => {
    test('should create valid password', () => {

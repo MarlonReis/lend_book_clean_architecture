@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../../shared/Either'
-import { InvalidBoletoParametersError } from '../../errors/InvalidBoletoParametersError'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidBoletoParametersError } from '@/domain/errors/InvalidBoletoParametersError'
 
 const fields = ['brokerCustomerId', 'brokerInvoiceId', 'referenceId', 'referenceOrigin',
     'pdf', 'visibleBarcode', 'dueDate']

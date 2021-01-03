@@ -1,5 +1,5 @@
-import { InternalServerError } from '../error/InternalServerError'
-import { HttpResponse } from '../protocol/Http'
+import { InternalServerError } from '@/presentation/error/InternalServerError'
+import { HttpResponse } from '@/presentation/protocol/Http'
 
 export const unProcessableEntity = (error: Error): HttpResponse => ({
     statusCode: 422,

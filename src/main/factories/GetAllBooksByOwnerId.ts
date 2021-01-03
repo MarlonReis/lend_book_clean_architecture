@@ -1,8 +1,8 @@
-import { DbGetAllBooksByOwnerId } from '../../data/usecase/DbGetAllBooksByOwnerId'
-import { ConnectionDatabaseMongoDb } from '../../infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
-import { GetAllBooksByOwnerIdMongoRepository } from '../../infrastructure/database/mongodb/repositories/GetAllBooksByOwnerIdMongoRepository'
-import { GetAllBooksByOwnerIdController } from '../../presentation/controller/GetAllBooksByOwnerIdController'
-import { Controller } from '../../presentation/protocol/Controller'
+import { DbGetAllBooksByOwnerId } from '@/data/usecase/DbGetAllBooksByOwnerId'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { GetAllBooksByOwnerIdMongoRepository } from '@/infrastructure/database/mongodb/repositories/GetAllBooksByOwnerIdMongoRepository'
+import { GetAllBooksByOwnerIdController } from '@/presentation/controller/GetAllBooksByOwnerIdController'
+import { Controller } from '@/presentation/protocol/Controller'
 import { LogControllerDecorator } from './LogControllerDecorator'
 
 const makeDbGetAllBooksByOwnerIdFactory = (): DbGetAllBooksByOwnerId => {

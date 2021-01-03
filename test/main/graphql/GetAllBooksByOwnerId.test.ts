@@ -1,7 +1,7 @@
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServerBase } from 'apollo-server-core'
-import { createGraphqlSchema } from '../../../src/main/graphql/config/App'
-import { ConnectionDatabaseMongoDb } from '../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { createGraphqlSchema } from '@/main/graphql/config/App'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const queryGetAllBooksByOwnerId = `
     query getByOwnerId($ownerId: String!){

@@ -1,9 +1,9 @@
-import { DbCreateUserAccount } from '../../data/usecase/DbCreateUserAccount'
-import { BCryptEncryptsPasswordAdapter } from '../../infrastructure/adapter/BCryptEncryptsPasswordAdapter'
-import { ConnectionDatabaseMongoDb } from '../../infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
-import { CreateUserAccountMongoRepository } from '../../infrastructure/database/mongodb/repositories/CreateUserAccountMongoRepository'
-import { CreateAccountController } from '../../presentation/controller/CreateAccountController'
-import { Controller } from '../../presentation/protocol/Controller'
+import { DbCreateUserAccount } from '@/data/usecase/DbCreateUserAccount'
+import { BCryptEncryptsPasswordAdapter } from '@/infrastructure/adapter/BCryptEncryptsPasswordAdapter'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { CreateUserAccountMongoRepository } from '@/infrastructure/database/mongodb/repositories/CreateUserAccountMongoRepository'
+import { CreateAccountController } from '@/presentation/controller/CreateAccountController'
+import { Controller } from '@/presentation/protocol/Controller'
 import { LogControllerDecorator } from './LogControllerDecorator'
 
 const makeDbCreateUserAccountFactory = (): DbCreateUserAccount => {

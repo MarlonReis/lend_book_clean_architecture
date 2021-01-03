@@ -1,5 +1,5 @@
 import { Collection, MongoClient } from 'mongodb'
-import { ConnectionDatabase } from '../../../protocol/ConnectionDatabase'
+import { ConnectionDatabase } from '@/infrastructure/protocol/ConnectionDatabase'
 
 export class ConnectionDatabaseMongoDb implements ConnectionDatabase {
     private static instance: ConnectionDatabaseMongoDb

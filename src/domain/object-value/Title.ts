@@ -1,5 +1,5 @@
-import { Either, failure, success } from '../../shared/Either'
-import { InvalidTitleError } from '../errors/InvalidTitleError'
+import { Either, failure, success } from '@/shared/Either'
+import { InvalidTitleError } from '@/domain/errors/InvalidTitleError'
 
 export class Title {
     private readonly value: string

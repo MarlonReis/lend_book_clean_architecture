@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
-import { EncryptsPassword } from '../../../src/data/protocol/EncryptsPassword'
-import { BCryptEncryptsPasswordAdapter } from '../../../src/infrastructure/adapter/BCryptEncryptsPasswordAdapter'
+import { EncryptsPassword } from '@/data/protocol/EncryptsPassword'
+import { BCryptEncryptsPasswordAdapter } from '@/infrastructure/adapter/BCryptEncryptsPasswordAdapter'
 
 describe('BCryptEncryptsPasswordAdapter', () => {
     let encrypt: EncryptsPassword

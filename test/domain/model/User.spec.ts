@@ -1,5 +1,5 @@
-import { InvalidParamError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/User'
+import { InvalidParamError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
 
 describe('User', () => {
     test('should create user with success', () => {

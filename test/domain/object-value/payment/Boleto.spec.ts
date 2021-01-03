@@ -1,5 +1,5 @@
-import { InvalidBoletoParametersError } from '../../../../src/domain/errors/InvalidBoletoParametersError'
-import { Boleto } from '../../../../src/domain/object-value/payment/Boleto'
+import { InvalidBoletoParametersError } from '@/domain/errors/InvalidBoletoParametersError'
+import { Boleto } from '@/domain/object-value/payment/Boleto'
 
 const boletoData = {
     brokerCustomerId: '2671DA9267DD4D21B24FC94D0B0B8063',

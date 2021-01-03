@@ -1,5 +1,5 @@
 import request from 'supertest'
-import app from '../../../../src/main/express/config/App'
+import app from '@/main/express/config/App'
 
 const requestData = { name: 'Any Name', data: 'Any Data', info: 'Any info' }
 

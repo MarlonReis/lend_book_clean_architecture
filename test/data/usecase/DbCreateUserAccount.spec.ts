@@ -1,10 +1,10 @@
-import { EncryptsPassword } from '../../../src/data/protocol/EncryptsPassword'
-import { CreateUserAccountRepository } from '../../../src/data/repositories/CreateUserAccountRepository'
-import { DbCreateUserAccount } from '../../../src/data/usecase/DbCreateUserAccount'
-import { CreateUserAccountError, InvalidParamError, InvalidPasswordError } from '../../../src/domain/errors'
-import { User } from '../../../src/domain/model/User'
-import { CreateUserAccount } from '../../../src/domain/usecase/CreateUserAccount'
-import { Either, success, failure } from '../../../src/shared/Either'
+import { EncryptsPassword } from '@/data/protocol/EncryptsPassword'
+import { CreateUserAccountRepository } from '@/data/repositories/CreateUserAccountRepository'
+import { DbCreateUserAccount } from '@/data/usecase/DbCreateUserAccount'
+import { CreateUserAccountError, InvalidParamError, InvalidPasswordError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
+import { CreateUserAccount } from '@/domain/usecase/CreateUserAccount'
+import { Either, success, failure } from '@/shared/Either'
 
 const makeEncryptsStub = (): EncryptsPassword => {
     class EncryptsPasswordStub implements EncryptsPassword {
@@ -150,7 +150,7 @@ describe('DbCreateUserAccount', () => {
     test('should return error when repository return', async () => {
         const { sut, createUserAccountRepositoryStub } = makeSutFactory()
         jest.spyOn(createUserAccountRepositoryStub, 'create')
-            .mockReturnValueOnce(Promise.resolve(failure(new Error('any message'))))
+            .mockReturnValueOnce(Promise.resolve(failure<any, any>(new Error('any message'))))
         const response = await sut.create({
             name: 'Valid Name',
             email: 'valid@email.com.br',

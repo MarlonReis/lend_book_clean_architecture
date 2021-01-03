@@ -1,5 +1,5 @@
-import { InvalidIdEntityError } from '../../../src/domain/errors'
-import { IdEntity } from '../../../src/domain/object-value'
+import { InvalidIdEntityError } from '@/domain/errors'
+import { IdEntity } from '@/domain/object-value'
 
 describe('IdEntity', () => {
     test('should create IdEntity with valid id', () => {

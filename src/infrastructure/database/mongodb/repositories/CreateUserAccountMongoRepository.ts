@@ -1,7 +1,7 @@
-import { CreateUserAccountRepository } from '../../../../data/repositories/CreateUserAccountRepository'
-import { CreateUserAccountError } from '../../../../domain/errors'
-import { User } from '../../../../domain/model/User'
-import { Either, failure, success } from '../../../../shared/Either'
+import { CreateUserAccountRepository } from '@/data/repositories/CreateUserAccountRepository'
+import { CreateUserAccountError } from '@/domain/errors'
+import { User } from '@/domain/model/User'
+import { Either, failure, success } from '@/shared/Either'
 import { ConnectionDatabaseMongoDb } from '../connection/ConnectionDatabaseMongoDb'
 
 const mapResponse = (collection: any): any => {

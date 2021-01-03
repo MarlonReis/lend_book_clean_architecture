@@ -1,4 +1,4 @@
-import { failure, success } from '../../src/shared/Either'
+import { failure, success } from '@/shared/Either'
 
 describe('Either', () => {
     test('should return object when call success function', () => {

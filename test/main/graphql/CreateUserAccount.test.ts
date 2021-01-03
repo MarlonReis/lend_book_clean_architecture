@@ -2,8 +2,8 @@ import 'reflect-metadata'
 
 import { createTestClient } from 'apollo-server-testing'
 import { ApolloServerBase } from 'apollo-server-core'
-import { createGraphqlSchema, app } from '../../../src/main/graphql/config/App'
-import { ConnectionDatabaseMongoDb } from '../../../src/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import { createGraphqlSchema, app } from '@/main/graphql/config/App'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 const mutationCreateAccount = `
         mutation create($name: String!, $email: String!, $password: String!) {
