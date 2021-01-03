@@ -2,8 +2,8 @@ import 'module-alias/register'
 import 'reflect-metadata'
 
 import { app } from './config/App'
-import config from '../config'
-import { ConnectionDatabaseMongoDb } from '../../infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
+import config from '@/main/config'
+import { ConnectionDatabaseMongoDb } from '@/infrastructure/database/mongodb/connection/ConnectionDatabaseMongoDb'
 
 ConnectionDatabaseMongoDb.getInstance().open(config.mongoUrl)
     .then(async () => {

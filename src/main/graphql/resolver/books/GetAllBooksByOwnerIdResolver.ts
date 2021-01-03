@@ -1,6 +1,6 @@
 import { Arg, Query, Resolver } from 'type-graphql'
-import { makeGetAllBooksByOwnerIdControllerFactory } from '../../../factories/GetAllBooksByOwnerId'
-import { BooksOwnerResponse } from '../../schema/book/BooksOwnerResponse'
+import { makeGetAllBooksByOwnerIdControllerFactory } from '@/main/factories/GetAllBooksByOwnerId'
+import { BooksOwnerResponse } from '@/main/graphql/schema/book/BooksOwnerResponse'
 
 @Resolver()
 export class GetAllBooksByOwnerIdResolver {

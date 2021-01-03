@@ -1,7 +1,7 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
-import { Controller } from '../../../../presentation/protocol/Controller'
-import { makeCreateUserAccountControllerFactory } from '../../../factories/CreateUserAccount'
-import { AccountResponse } from '../../schema/account/AccountResponse'
+import { Controller } from '@/presentation/protocol/Controller'
+import { makeCreateUserAccountControllerFactory } from '@/main/factories/CreateUserAccount'
+import { AccountResponse } from '@/main/graphql/schema/account/AccountResponse'
 import { CreateAccountInput } from './CreateAccountInput'
 
 @Resolver()
