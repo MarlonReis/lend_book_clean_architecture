@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build":"rimraf dist && tsc -p tsconfig-build.json",
     "start:express": "nodemon --exec ts-node src/main/express/StartServer.ts",
     "start:gql": "nodemon --exec ts-node src/main/graphql/StartServer.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles",
@@ -22,6 +23,7 @@
     "class-validator": "^0.12.2",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
+    "module-alias": "^2.2.2",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"
   },
@@ -57,5 +59,8 @@
     "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0"
+  },
+  "_moduleAliases": {
+    "@": "src"
   }
 }
