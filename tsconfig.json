@@ -3,12 +3,22 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es2019",
-    "lib": ["es2019","esnext.asynciterable"],
+    "lib": [
+      "es2019",
+      "esnext.asynciterable"
+    ],
     "esModuleInterop": true,
     "allowJs": true,
     "noEmitOnError": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  },
-  
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": "src",
+    "rootDirs": [
+      "src"
+    ],
+    "paths": {
+      "@/*": ["*"],
+    }
+  }
 }
