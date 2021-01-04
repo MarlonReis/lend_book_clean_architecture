@@ -1,9 +1,5 @@
 # Clean Architecture e TDD com TypeScript
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 Esse templete possui o proposito de demonstrar a aplicação de conceitos que nos permite projetar aplicações simples e resilientes, não possui o proposito de resolver o problema de emprestimos de livros.
 
 ## Conceitos abordados 
