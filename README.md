@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/MarlonReis/lend_book_clean_architecture.svg?branch=master)](https://travis-ci.com/MarlonReis/lend_book_clean_architecture)
 
+[![Coverage Status](https://coveralls.io/repos/github/MarlonReis/lend_book_clean_architecture/badge.svg?branch=master)]
+(https://coveralls.io/github/taniarascia/chip8?branch=master)
 Esse templete possui o proposito de demonstrar a aplicação de conceitos que nos permite projetar aplicações simples e resilientes, não possui o proposito de resolver o problema de emprestimos de livros.
 
 ## Conceitos abordados 
