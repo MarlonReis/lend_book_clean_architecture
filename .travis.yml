@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+  - node
+  - '12.20.0'
+
+cache: npm
+    
+script:
+  - npm run test 
